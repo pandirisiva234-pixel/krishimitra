@@ -60,6 +60,10 @@ class Settings(BaseSettings):
     # keeps only 62.8% of farming words in the newer languages (Gemini 96.7%; e.g. "blight" -> "bulbul"
     # in Urdu), and live Kannada tests turned caterpillars into cockroaches and moths into crocodiles.
     # NLLB stays the automatic backup if Gemini fails or is busy. Empty = NLLB for every language.
+    # Time limits for the optional Gemini steps: when Gemini is busy the app moves on at once
+    # (plain translation for the question check, AI4Bharat/NLLB for the answer) instead of waiting.
+    LLM_REFINE_TIMEOUT_S: float = 10.0
+    LLM_TRANSLATE_TIMEOUT_S: float = 15.0
     LLM_TRANSLATE_LANGUAGES: list[str] = ["te", "hi", "kn", "ta", "ml", "mr", "bn", "gu", "ur"]
     GEMINI_THINKING_LEVEL: str | None = "minimal"
     OPENWEATHER_API_KEY: str | None = None

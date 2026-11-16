@@ -326,3 +326,28 @@ def test_gemini_translation_retried_when_another_alphabet_slips_in(client, farme
     finally:
         services.llm.reply = DEFAULT_REPLY
     assert data["answer"].startswith("ಕತ್ತರಿ")
+
+
+def test_slow_gemini_translation_falls_back_quickly(client, farmer, knowledge, services, monkeypatch):
+    """When Gemini hangs (busy), the answer is translated by the backup engine instead of waiting."""
+    import asyncio
+    import time
+
+    from app.core.config import get_settings
+
+    monkeypatch.setattr(get_settings(), "LLM_TRANSLATE_LANGUAGES", ["ur"])
+    monkeypatch.setattr(get_settings(), "LLM_TRANSLATE_TIMEOUT_S", 0.2)
+    real_generate = services.llm.generate
+    calls = {"n": 0}
+
+    async def slow_on_translation(prompt, system_instruction, **kw):
+        calls["n"] += 1
+        if calls["n"] > 1:  # the first call writes the answer; later ones translate it
+            await asyncio.sleep(5)
+        return await real_generate(prompt, system_instruction, **kw)
+
+    monkeypatch.setattr(services.llm, "generate", slow_on_translation)
+    start = time.monotonic()
+    data = ask(client, farmer["headers"], text="How to control early blight on tomato?", language_code="ur").json()
+    assert data["answer"].startswith("<urd_Arab>")  # backup translator
+    assert time.monotonic() - start < 4

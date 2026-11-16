@@ -8,6 +8,7 @@
 
 CPU-heavy model calls run in a thread pool so the server stays responsive.
 """
+import asyncio
 import logging
 import unicodedata
 import re
@@ -112,8 +113,9 @@ class AssistantService:
             return None
         try:
             for _attempt in range(2):
-                out = clean_markdown(await self.s.llm.generate(
-                    text, build_translate_system_prompt(lang["name"]), retries=2, max_output_tokens=2048))
+                out = clean_markdown(await asyncio.wait_for(self.s.llm.generate(
+                    text, build_translate_system_prompt(lang["name"]), retries=1, max_output_tokens=2048),
+                    timeout=self.settings.LLM_TRANSLATE_TIMEOUT_S))
                 # a reply still mostly in English is not a translation
                 latin = sum(1 for c in out if "a" <= c.lower() <= "z")
                 letters = sum(1 for c in out if c.isalpha()) or 1
@@ -227,10 +229,10 @@ class AssistantService:
             # Gemini reads the farmer's own words and fixes NLLB's farm terms before the search
             with timer.stage("refine_query"):
                 try:
-                    refined = await self.s.llm.generate(
+                    refined = await asyncio.wait_for(self.s.llm.generate(
                         build_query_refine_prompt(text, in_lang.name, english, farm_terms),
-                        QUERY_REFINE_SYSTEM_PROMPT,
-                    )
+                        QUERY_REFINE_SYSTEM_PROMPT, retries=1,
+                    ), timeout=self.settings.LLM_REFINE_TIMEOUT_S)
                     english = clean_refined_query(refined, english)
                 except Exception:  # noqa: BLE001  - never fail the answer because of this optional step
                     logger.warning("Query refinement failed; using the NLLB translation", exc_info=True)
