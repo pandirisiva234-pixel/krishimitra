@@ -1,13 +1,16 @@
 # KrishiMitra — Multilingual Voice-Based Farming Assistant with Camera-Based Plant Disease Detection
 
-MCA Data Science major project. Farmers ask questions by voice in **Telugu, Hindi, Tamil, Kannada or English**,
-get answers grounded in agricultural documents (with sources), hear the answer spoken back, check the weather
-with farm advisories, and photograph a leaf to detect plant diseases.
+MCA Data Science major project. Farmers ask questions by voice in **10 languages** (Telugu, Hindi, Kannada,
+Tamil, Malayalam, Marathi, Bengali, Gujarati, Urdu, English), get answers grounded in 11 government agricultural
+documents (with sources), hear the answer spoken back, check the weather with farm advisories, photograph a leaf
+to detect plant diseases, and scan a pesticide or fertilizer pack to learn how to use it safely.
+
+![KrishiMitra system architecture](docs/architecture.png)
 
 ```
-Voice ─► Faster-Whisper ─► NLLB-200 (to English) ─► intent ─► RAG (ChromaDB + FlashRank) ─► Gemini
-      ◄─ Edge-TTS ◄─ NLLB-200 (back to the farmer's language) ◄────────────────────────────┘
-Photo ─► OpenCV ─► CNN (PyTorch, exported to ONNX) ─► disease + treatment
+Voice ─► Whisper (+ IIT Madras te/kn) ─► IndicTrans2 to English ─► intent ─► RAG (ChromaDB + FlashRank) ─► Gemini
+      ◄─ Edge-TTS ◄─ Gemini translation (backup IndicTrans2 → NLLB) ◄───────────────────────────────────┘
+Photo ─► OpenCV ─► MobileNetV3-Large (ONNX) ─► disease + treatment  (Gemini second opinion when unsure)
 ```
 
 ## What is in this folder

@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1110" viewBox="0 0 1600 1110">
+<defs>
+<marker id="arrow-1f5c3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f5c3a"/></marker>
+<marker id="arrow-c48a12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c48a12"/></marker>
+<marker id="arrow-4c5d8a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4c5d8a"/></marker>
+<marker id="arrow-7b847f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7b847f"/></marker>
+</defs>
+<rect width="1600" height="1110" fill="white"/>
+<text x="40" y="48" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="28" font-weight="bold" fill="#164429" text-anchor="start">KrishiMitra — System Architecture</text>
+<text x="40" y="74" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="15" font-weight="normal" fill="#55615a" text-anchor="start">Multilingual voice farming assistant with camera-based plant disease detection</text>
+<rect x="40" y="100" width="1210" height="100" rx="16" fill="#fffdf6" stroke="#c48a12" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="58" y="126" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" fill="#c48a12" text-anchor="start">Users</text>
+<rect x="330" y="128" width="260" height="58" rx="12" fill="#fff4d6" stroke="#c48a12" stroke-width="1.6"/>
+<text x="460.0" y="153.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d2b23" text-anchor="middle">Farmer</text>
+<text x="460.0" y="172.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">voice · text · camera · GPS</text>
+<rect x="700" y="128" width="260" height="58" rx="12" fill="#fff4d6" stroke="#c48a12" stroke-width="1.6"/>
+<text x="830.0" y="153.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d2b23" text-anchor="middle">Admin</text>
+<text x="830.0" y="172.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">users · knowledge documents</text>
+<rect x="40" y="225" width="1210" height="125" rx="16" fill="#f7faf8" stroke="#1f5c3a" stroke-width="1.4"/>
+<text x="58" y="251" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f5c3a" text-anchor="start">Presentation layer</text>
+<text x="252" y="251" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#55615a" text-anchor="start">React 19 + Vite · light / dark theme · 10 languages</text>
+<rect x="60" y="262" width="182" height="70" rx="12" fill="white" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="151.0" y="293.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Voice assistant</text>
+<text x="151.0" y="312.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">mic · speech player</text>
+<rect x="256" y="262" width="182" height="70" rx="12" fill="white" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="347.0" y="293.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Disease detection</text>
+<text x="347.0" y="312.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">leaf photo</text>
+<rect x="452" y="262" width="182" height="70" rx="12" fill="white" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="543.0" y="293.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Farm item scanner</text>
+<text x="543.0" y="312.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">bottle / packet</text>
+<rect x="648" y="262" width="182" height="70" rx="12" fill="white" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="739.0" y="293.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Weather</text>
+<text x="739.0" y="312.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">current location</text>
+<rect x="844" y="262" width="182" height="70" rx="12" fill="white" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="935.0" y="293.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Knowledge &amp; History</text>
+<text x="935.0" y="312.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">search · past chats</text>
+<rect x="1040" y="262" width="182" height="70" rx="12" fill="white" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="1131.0" y="293.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Admin panel</text>
+<text x="1131.0" y="312.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">users · documents</text>
+<rect x="40" y="375" width="1210" height="95" rx="16" fill="#f7faf8" stroke="#1f5c3a" stroke-width="1.4"/>
+<text x="58" y="401" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f5c3a" text-anchor="start">API layer</text>
+<text x="162" y="401" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#55615a" text-anchor="start">FastAPI</text>
+<rect x="60" y="410" width="1170" height="46" rx="12" fill="#1f5c3a" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="645.0" y="439.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">REST API  ·  JWT login  ·  rate limiting  ·  input validation  ·  /auth  /assistant  /disease  /items  /weather  /knowledge  /admin</text>
+<rect x="40" y="495" width="1210" height="420" rx="16" fill="#f7faf8" stroke="#1f5c3a" stroke-width="1.4"/>
+<text x="58" y="521" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1f5c3a" text-anchor="start">AI services layer</text>
+<text x="242" y="521" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#55615a" text-anchor="start">Python · runs on the laptop CPU (int8 models)</text>
+<text x="60" y="548" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1f5c3a" text-anchor="start">Voice question pipeline</text>
+<rect x="60" y="562" width="152" height="86" rx="12" fill="#eef6f0" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="136.0" y="593.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">1 · Speech to text</text>
+<text x="136.0" y="612.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">Whisper (language ID)</text>
+<text x="136.0" y="628.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">IIT Madras te / kn</text>
+<line x1="214" y1="605" x2="227" y2="605" stroke="#1f5c3a" stroke-width="1.8" marker-end="url(#arrow-1f5c3a)"/>
+<rect x="229" y="562" width="152" height="86" rx="12" fill="#eef6f0" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="305.0" y="593.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">2 · To English</text>
+<text x="305.0" y="612.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">AI4Bharat IndicTrans2</text>
+<text x="305.0" y="628.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">+ farm glossary</text>
+<line x1="383" y1="605" x2="396" y2="605" stroke="#1f5c3a" stroke-width="1.8" marker-end="url(#arrow-1f5c3a)"/>
+<rect x="398" y="562" width="152" height="86" rx="12" fill="#eef6f0" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="474.0" y="593.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">3 · Intent</text>
+<text x="474.0" y="612.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">TF-IDF classifier</text>
+<text x="474.0" y="628.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">+ keywords</text>
+<line x1="552" y1="605" x2="565" y2="605" stroke="#1f5c3a" stroke-width="1.8" marker-end="url(#arrow-1f5c3a)"/>
+<rect x="567" y="562" width="152" height="86" rx="12" fill="#eef6f0" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="643.0" y="593.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">4 · Retrieve (RAG)</text>
+<text x="643.0" y="612.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">MiniLM → ChromaDB</text>
+<text x="643.0" y="628.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">FlashRank · crop-aware</text>
+<line x1="721" y1="605" x2="734" y2="605" stroke="#1f5c3a" stroke-width="1.8" marker-end="url(#arrow-1f5c3a)"/>
+<rect x="736" y="562" width="152" height="86" rx="12" fill="#fff4d6" stroke="#c48a12" stroke-width="1.6"/>
+<text x="812.0" y="593.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">5 · Answer</text>
+<text x="812.0" y="612.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">Gemini, cited [1]</text>
+<text x="812.0" y="628.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">problem · cure · prevent</text>
+<line x1="890" y1="605" x2="903" y2="605" stroke="#1f5c3a" stroke-width="1.8" marker-end="url(#arrow-1f5c3a)"/>
+<rect x="905" y="562" width="152" height="86" rx="12" fill="#fff4d6" stroke="#c48a12" stroke-width="1.6"/>
+<text x="981.0" y="593.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">6 · Translate back</text>
+<text x="981.0" y="612.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">Gemini · backup</text>
+<text x="981.0" y="628.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">IndicTrans2 → NLLB</text>
+<line x1="1059" y1="605" x2="1072" y2="605" stroke="#1f5c3a" stroke-width="1.8" marker-end="url(#arrow-1f5c3a)"/>
+<rect x="1074" y="562" width="152" height="86" rx="12" fill="#eef6f0" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="1150.0" y="593.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="13.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">7 · Speak</text>
+<text x="1150.0" y="612.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">Edge-TTS</text>
+<text x="1150.0" y="628.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">gTTS backup</text>
+<text x="60" y="690" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1f5c3a" text-anchor="start">Camera and other services</text>
+<rect x="60" y="704" width="250" height="86" rx="12" fill="#eef6f0" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="185.0" y="735.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d2b23" text-anchor="middle">Disease detection</text>
+<text x="185.0" y="754.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">OpenCV → MobileNetV3-Large</text>
+<text x="185.0" y="770.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">ONNX · 38 classes · 99.45%</text>
+<line x1="312" y1="747" x2="358" y2="747" stroke="#c48a12" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#arrow-c48a12)"/>
+<text x="316" y="735" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="11" font-weight="normal" fill="#55615a" text-anchor="start">unsure</text>
+<rect x="360" y="704" width="220" height="86" rx="12" fill="#fff4d6" stroke="#c48a12" stroke-width="1.6"/>
+<text x="470.0" y="735.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d2b23" text-anchor="middle">AI second opinion</text>
+<text x="470.0" y="754.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">Gemini vision</text>
+<text x="470.0" y="770.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">for unsure photos</text>
+<rect x="600" y="704" width="200" height="86" rx="12" fill="#fff4d6" stroke="#c48a12" stroke-width="1.6"/>
+<text x="700.0" y="735.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d2b23" text-anchor="middle">Farm item scanner</text>
+<text x="700.0" y="754.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">Gemini vision: use,</text>
+<text x="700.0" y="770.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">safety, toxicity</text>
+<rect x="820" y="704" width="200" height="86" rx="12" fill="#eef6f0" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="920.0" y="735.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d2b23" text-anchor="middle">Weather advisories</text>
+<text x="920.0" y="754.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">forecast + farm rules</text>
+<text x="920.0" y="770.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">spray · rain · irrigation</text>
+<rect x="1040" y="704" width="190" height="86" rx="12" fill="#eef6f0" stroke="#1f5c3a" stroke-width="1.6"/>
+<text x="1135.0" y="735.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="15" font-weight="bold" fill="#1d2b23" text-anchor="middle">Document ingestion</text>
+<text x="1135.0" y="754.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">PDF → chunks</text>
+<text x="1135.0" y="770.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">→ embeddings</text>
+<rect x="60" y="820" width="22" height="16" rx="4" fill="#fff4d6" stroke="#c48a12"/>
+<text x="90" y="833" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#55615a" text-anchor="start">uses the Gemini API</text>
+<rect x="260" y="820" width="22" height="16" rx="4" fill="#eef6f0" stroke="#1f5c3a"/>
+<text x="290" y="833" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#55615a" text-anchor="start">runs locally (no internet needed)</text>
+<text x="60" y="870" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#55615a" text-anchor="start">Answers in Telugu, Hindi, Kannada, Tamil, Malayalam, Marathi, Bengali, Gujarati, Urdu and English. Weather questions go from step 3 to the weather service.</text>
+<text x="60" y="892" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#55615a" text-anchor="start">Translation backups: if Gemini is busy, AI4Bharat IndicTrans2 translates; if that fails, Meta NLLB-200.</text>
+<rect x="40" y="940" width="1210" height="150" rx="16" fill="#f7f8fc" stroke="#4c5d8a" stroke-width="1.4"/>
+<text x="58" y="966" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" fill="#4c5d8a" text-anchor="start">Data layer</text>
+<path d="M70,992 a180.0,12 0 0,0 360,0 v62 a180.0,12 0 0,1 -360,0 z" fill="#e9edf7" stroke="#4c5d8a" stroke-width="1.6"/>
+<ellipse cx="250.0" cy="992" rx="180.0" ry="12" fill="#e9edf7" stroke="#4c5d8a" stroke-width="1.6"/>
+<text x="250.0" y="1024" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">PostgreSQL</text>
+<text x="250.0" y="1043" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">users · languages · conversations</text>
+<text x="250.0" y="1059" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">queries · predictions · documents</text>
+<path d="M470,992 a180.0,12 0 0,0 360,0 v62 a180.0,12 0 0,1 -360,0 z" fill="#e9edf7" stroke="#4c5d8a" stroke-width="1.6"/>
+<ellipse cx="650.0" cy="992" rx="180.0" ry="12" fill="#e9edf7" stroke="#4c5d8a" stroke-width="1.6"/>
+<text x="650.0" y="1024" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">ChromaDB (vector store)</text>
+<text x="650.0" y="1043" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">11 government documents</text>
+<text x="650.0" y="1059" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">1,416 text chunks</text>
+<path d="M870,992 a180.0,12 0 0,0 360,0 v62 a180.0,12 0 0,1 -360,0 z" fill="#e9edf7" stroke="#4c5d8a" stroke-width="1.6"/>
+<ellipse cx="1050.0" cy="992" rx="180.0" ry="12" fill="#e9edf7" stroke="#4c5d8a" stroke-width="1.6"/>
+<text x="1050.0" y="1024" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14.5" font-weight="bold" fill="#1d2b23" text-anchor="middle">File storage</text>
+<text x="1050.0" y="1043" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">voice recordings · spoken answers</text>
+<text x="1050.0" y="1059" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">leaf photos · PDFs</text>
+<line x1="645.0" y1="200" x2="645.0" y2="223" stroke="#1f5c3a" stroke-width="2.4" marker-end="url(#arrow-1f5c3a)"/>
+<line x1="645.0" y1="350" x2="645.0" y2="373" stroke="#1f5c3a" stroke-width="2.4" marker-end="url(#arrow-1f5c3a)"/>
+<text x="659.0" y="365.5" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="11.5" font-weight="normal" fill="#55615a" text-anchor="start">HTTPS / JSON</text>
+<line x1="645.0" y1="470" x2="645.0" y2="493" stroke="#1f5c3a" stroke-width="2.4" marker-end="url(#arrow-1f5c3a)"/>
+<line x1="645.0" y1="915" x2="645.0" y2="938" stroke="#4c5d8a" stroke-width="2.4" marker-end="url(#arrow-4c5d8a)"/>
+<text x="659.0" y="930.5" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="11.5" font-weight="normal" fill="#55615a" text-anchor="start">save · read · search</text>
+<rect x="1280" y="100" width="290" height="990" rx="16" fill="#fbfbfb" stroke="#7b847f" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="1298" y="126" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="16" font-weight="bold" fill="#7b847f" text-anchor="start">External</text>
+<rect x="1298" y="560" width="254" height="78" rx="12" fill="#fff4d6" stroke="#c48a12" stroke-width="1.6"/>
+<text x="1425.0" y="587.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Google Gemini API</text>
+<text x="1425.0" y="606.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">answers · translation</text>
+<text x="1425.0" y="622.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">vision · query check</text>
+<rect x="1298" y="720" width="254" height="78" rx="12" fill="#f1f2f1" stroke="#7b847f" stroke-width="1.6"/>
+<text x="1425.0" y="747.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">OpenWeather API</text>
+<text x="1425.0" y="766.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">live weather</text>
+<text x="1425.0" y="782.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">5-day forecast</text>
+<rect x="1298" y="840" width="254" height="78" rx="12" fill="#f1f2f1" stroke="#7b847f" stroke-width="1.6"/>
+<text x="1425.0" y="875.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Microsoft Edge TTS</text>
+<text x="1425.0" y="894.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">spoken answers</text>
+<rect x="1298" y="950" width="254" height="78" rx="12" fill="#f1f2f1" stroke="#7b847f" stroke-width="1.6"/>
+<text x="1425.0" y="977.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="14" font-weight="bold" fill="#1d2b23" text-anchor="middle">Hugging Face Hub</text>
+<text x="1425.0" y="996.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">model downloads</text>
+<text x="1425.0" y="1012.0" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif" font-size="12" font-weight="normal" fill="#55615a" text-anchor="middle">(first run only)</text>
+<line x1="1252" y1="605" x2="1296" y2="599" stroke="#c48a12" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-c48a12)"/>
+<line x1="1252" y1="760" x2="1296" y2="759" stroke="#7b847f" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-7b847f)"/>
+<line x1="1252" y1="879" x2="1296" y2="879" stroke="#7b847f" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-7b847f)"/>
+</svg>
