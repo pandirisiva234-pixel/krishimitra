@@ -1,0 +1,241 @@
+text,label
+When is the best time to sow paddy in kharif season?,crop_cultivation
+Which groundnut variety is suitable for sandy soil?,crop_cultivation
+What is the seed rate for cotton per acre?,crop_cultivation
+How much spacing should I keep between chilli plants?,crop_cultivation
+How many days does tomato nursery take before transplanting?,crop_cultivation
+Can I grow maize after harvesting paddy?,crop_cultivation
+Which crop is good for rabi season in black soil?,crop_cultivation
+How do I prepare the land before sowing groundnut?,crop_cultivation
+What is the right depth to sow maize seeds?,crop_cultivation
+Should I treat seeds before sowing cotton?,crop_cultivation
+How to raise healthy chilli seedlings in a nursery?,crop_cultivation
+What is the crop duration of short duration paddy varieties?,crop_cultivation
+Is direct seeded rice better than transplanting?,crop_cultivation
+How many plants should be there in one acre of tomato?,crop_cultivation
+Which hybrid tomato gives good yield in summer?,crop_cultivation
+When should I do thinning in cotton?,crop_cultivation
+Can I do intercropping of redgram with cotton?,crop_cultivation
+What is the best month to plant banana suckers?,crop_cultivation
+How to do staking for tomato plants?,crop_cultivation
+How to control weeds in groundnut field without chemicals?,crop_cultivation
+Which herbicide is used before sowing maize to control weeds?,crop_cultivation
+What is the method of SRI paddy cultivation?,crop_cultivation
+How old should paddy seedlings be at transplanting?,crop_cultivation
+Can chilli be grown on raised beds?,crop_cultivation
+What crop rotation is good after cotton?,crop_cultivation
+How to grow vegetables in my backyard?,crop_cultivation
+Is mulching sheet useful for chilli cultivation?,crop_cultivation
+How to start organic farming on my land?,crop_cultivation
+What should I plant on field bunds?,crop_cultivation
+Which pulses can I grow in residual moisture after paddy?,crop_cultivation
+There are white flies on my cotton leaves what should I spray?,pest_disease
+My tomato leaves have brown spots with rings,pest_disease
+How to control stem borer in paddy?,pest_disease
+Chilli leaves are curling upwards what is the reason?,pest_disease
+Pink bollworm is damaging my cotton bolls,pest_disease
+Groundnut leaves have small dark spots and are falling,pest_disease
+How to manage blast disease in rice?,pest_disease
+Aphids are sucking the sap from my mustard plants,pest_disease
+My tomato plants are wilting suddenly in the afternoon,pest_disease
+Fall armyworm is eating my maize whorls,pest_disease
+What is the treatment for powdery mildew on chilli?,pest_disease
+Thrips are attacking my chilli crop,pest_disease
+Leaves of brinjal have holes made by beetles,pest_disease
+Which pesticide is safe for controlling leaf folder in paddy?,pest_disease
+How to use neem oil to control pests?,pest_disease
+Fruit borer is damaging my tomato fruits,pest_disease
+Brown plant hopper attack in paddy field how to stop it,pest_disease
+Yellow sticky traps are useful for which insects?,pest_disease
+My groundnut has collar rot what should I do?,pest_disease
+Cotton leaves turned red what disease is this?,pest_disease
+How to identify late blight in potato?,pest_disease
+Mites are present on the underside of chilli leaves,pest_disease
+Rats are damaging the paddy crop how to control,pest_disease
+Termites are attacking sugarcane setts,pest_disease
+Mosaic pattern on tomato leaves is it a virus?,pest_disease
+How to make pheromone traps for bollworm?,pest_disease
+Sheath blight is spreading in my paddy,pest_disease
+Bacterial leaf blight symptoms in rice,pest_disease
+Fungus is growing on my onion bulbs,pest_disease
+My mango flowers are dropping due to hoppers,pest_disease
+How much urea should I apply to paddy per acre?,fertilizer_soil
+When to apply DAP for groundnut?,fertilizer_soil
+My soil is acidic how to correct it?,fertilizer_soil
+Leaves are yellow between the veins is it zinc deficiency?,fertilizer_soil
+How to get my soil tested?,fertilizer_soil
+Is gypsum needed for groundnut?,fertilizer_soil
+How to prepare vermicompost at home?,fertilizer_soil
+What is the fertilizer schedule for cotton?,fertilizer_soil
+Can I mix urea and potash together?,fertilizer_soil
+How much farmyard manure should I add before planting?,fertilizer_soil
+My soil health card says low nitrogen what should I do?,fertilizer_soil
+Which biofertilizer is good for pulses?,fertilizer_soil
+How to apply micronutrients by foliar spray?,fertilizer_soil
+What is the NPK dose for chilli?,fertilizer_soil
+Saline soil in my field how to improve it,fertilizer_soil
+Should I apply fertilizer before or after irrigation?,fertilizer_soil
+How to use green manure crops to improve soil?,fertilizer_soil
+Calcium deficiency symptoms in tomato,fertilizer_soil
+Is water soluble fertilizer better for drip?,fertilizer_soil
+How many splits of nitrogen for maize?,fertilizer_soil
+What is the use of sulphur fertilizer in oilseeds?,fertilizer_soil
+How to increase organic carbon in my soil?,fertilizer_soil
+Paddy leaves turning pale yellow after transplanting,fertilizer_soil
+Can I use poultry manure for vegetables?,fertilizer_soil
+How to apply zinc sulphate in rice fields?,fertilizer_soil
+My soil is hard and cracks in summer what to add?,fertilizer_soil
+Which fertilizer increases fruit size in tomato?,fertilizer_soil
+What is the pH range suitable for most crops?,fertilizer_soil
+Is too much urea harmful for crops?,fertilizer_soil
+How to make jeevamrutham for my field?,fertilizer_soil
+How often should I irrigate cotton?,irrigation_water
+What is the critical stage for irrigation in groundnut?,irrigation_water
+How much water does paddy need during tillering?,irrigation_water
+Is drip irrigation suitable for chilli?,irrigation_water
+How to set up a sprinkler system for groundnut?,irrigation_water
+Can I use borewell water with high salt for irrigation?,irrigation_water
+How to save water in paddy cultivation?,irrigation_water
+What is alternate wetting and drying in rice?,irrigation_water
+My field gets waterlogged after rain how to drain it?,irrigation_water
+How many hours should I run the drip for tomato?,irrigation_water
+Is there any subsidy for drip irrigation?,irrigation_water
+How to know when my crop needs water?,irrigation_water
+Should I water the crop in the morning or evening?,irrigation_water
+How to clean clogged drip laterals?,irrigation_water
+What is fertigation and how to do it?,irrigation_water
+How to store rainwater in a farm pond?,irrigation_water
+Furrow irrigation or flood irrigation which is better for maize?,irrigation_water
+How much water does sugarcane need per week?,irrigation_water
+Can mulching reduce irrigation needs?,irrigation_water
+Over watering is causing root rot in my seedlings,irrigation_water
+How to check soil moisture without a meter?,irrigation_water
+What is the irrigation interval for banana in summer?,irrigation_water
+How to irrigate the nursery beds properly?,irrigation_water
+Canal water comes only once a week how to plan irrigation?,irrigation_water
+Is it okay to irrigate during flowering of groundnut?,irrigation_water
+How to use a soil moisture sensor?,irrigation_water
+Should I stop irrigation before harvest of paddy?,irrigation_water
+How much water does one drip emitter give per hour?,irrigation_water
+What is the best irrigation method for sandy soil?,irrigation_water
+My motor runs for many hours how to reduce electricity use for irrigation?,irrigation_water
+Will it rain tomorrow in my village?,weather
+What is the temperature today?,weather
+Is this a good day to spray pesticides?,weather
+How much rain is expected this week?,weather
+Is the wind too strong for spraying now?,weather
+When will the monsoon arrive this year?,weather
+What is the humidity right now?,weather
+Will there be a cyclone this week?,weather
+Should I harvest today or wait because of rain?,weather
+Is there any heat wave warning?,weather
+What is the weather forecast for the next five days?,weather
+Will it be cloudy tomorrow morning?,weather
+Is it going to be very hot this afternoon?,weather
+Should I apply fertilizer today or will rain wash it away?,weather
+Is there frost expected tonight?,weather
+How is the weather for sowing this week?,weather
+Will heavy rain come in the next two days?,weather
+What is the chance of rain today?,weather
+Is the weather suitable for drying harvested paddy?,weather
+Tell me today's weather,weather
+What will be the minimum temperature tonight?,weather
+Is it windy today?,weather
+Will there be thunderstorms this evening?,weather
+Is the humidity high enough to cause fungal disease?,weather
+How many days of dry weather are coming?,weather
+Weather update for my farm please,weather
+Is rain expected before the weekend?,weather
+How hot will it be tomorrow?,weather
+Can I irrigate today or is rain expected?,weather
+Is the sky clear for spraying in the evening?,weather
+When is the right time to harvest groundnut?,harvest_storage
+How to know paddy is ready for harvest?,harvest_storage
+How to store paddy grains without insects?,harvest_storage
+What moisture level is safe for storing maize?,harvest_storage
+How to dry chilli properly after picking?,harvest_storage
+How long can I store onions?,harvest_storage
+How to prevent aflatoxin in stored groundnut?,harvest_storage
+When to pick cotton for good quality lint?,harvest_storage
+How to store tomatoes to avoid quick spoilage?,harvest_storage
+What are hermetic storage bags?,harvest_storage
+How to use a combine harvester for paddy?,harvest_storage
+Grains in my godown have weevils what to do?,harvest_storage
+How to grade and pack mangoes after harvest?,harvest_storage
+Should I thresh paddy immediately after cutting?,harvest_storage
+How to reduce losses during harvest?,harvest_storage
+What is the best way to store seeds for next season?,harvest_storage
+How to dry groundnut pods after harvest?,harvest_storage
+Can I store pulses with neem leaves?,harvest_storage
+How to prevent mould in stored chillies?,harvest_storage
+When to harvest maize for grain?,harvest_storage
+How to store potatoes at home without cold storage?,harvest_storage
+What is the right stage to harvest banana bunches?,harvest_storage
+How to clean grains before storage?,harvest_storage
+How to keep harvested vegetables fresh for longer?,harvest_storage
+Is solar drying good for crops?,harvest_storage
+What yield can I expect from one acre of paddy?,harvest_storage
+How to calculate the maturity of turmeric?,harvest_storage
+How to store cotton bales safely?,harvest_storage
+Should I harvest in the morning or evening?,harvest_storage
+How to protect harvested crop from rats in storage?,harvest_storage
+Hello,greeting
+Hi there,greeting
+Good morning,greeting
+Namaste,greeting
+Thank you very much,greeting
+Thanks for the help,greeting
+Good evening,greeting
+Hello how are you,greeting
+Bye,greeting
+Thanks a lot,greeting
+Hi KrishiMitra,greeting
+Good afternoon,greeting
+Okay thank you,greeting
+Hello can you hear me,greeting
+Who are you,greeting
+What can you do,greeting
+Nice to meet you,greeting
+Thank you for the information,greeting
+See you later,greeting
+Hey,greeting
+Good night,greeting
+Hello sir,greeting
+Thanks madam,greeting
+Are you there,greeting
+Hi good morning,greeting
+Thank you so much,greeting
+Ok bye,greeting
+Hello friend,greeting
+Greetings,greeting
+Thanks it was helpful,greeting
+What is the price of gold today?,other
+Who won the cricket match yesterday?,other
+How to apply for a ration card?,other
+Tell me a joke,other
+What is the capital of India?,other
+How to repair my mobile phone?,other
+Can you book a bus ticket for me?,other
+What movie is playing in the theatre?,other
+How to open a bank account?,other
+What is my account balance?,other
+Recommend a good song,other
+How to learn English quickly?,other
+What is the news today?,other
+How to make tea?,other
+Where is the nearest hospital?,other
+How do I recharge my phone?,other
+Can you help me with my child's homework?,other
+What is the date today?,other
+How to lose weight?,other
+Translate this letter for me,other
+Where can I buy a tractor?,other
+What time does the bank open?,other
+How to get a driving licence?,other
+Write a poem about rain,other
+What is the population of India?,other
+How do I use WhatsApp?,other
+When is the next festival holiday?,other
+Can you call my son?,other
+How to fix a punctured bicycle tyre?,other
+What is artificial intelligence?,other

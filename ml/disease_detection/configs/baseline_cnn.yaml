@@ -1,0 +1,18 @@
+# Training config for baseline_cnn. Paths are relative to ml/disease_detection.
+run_name: baseline_cnn
+model: baseline_cnn
+train_csv: splits/train.csv
+val_csv: splits/val.csv
+results_dir: results
+image_size: 224
+batch_size: 64
+pretrained: false
+head_epochs: 0
+epochs: 30
+lr: 0.001
+patience: 6
+weight_decay: 0.0001
+label_smoothing: 0.1
+class_weights: true   # counter class imbalance found in EDA
+num_workers: 2
+seed: 42

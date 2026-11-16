@@ -1,0 +1,46 @@
+# ---------- Web API ----------
+fastapi[standard]==0.162.6
+pydantic-settings==2.16.3
+email-validator==2.3.0
+python-multipart==0.0.33
+slowapi==0.1.10
+httpx==0.28.1
+
+# ---------- Database ----------
+SQLAlchemy==2.1.8
+psycopg[binary]==3.3.9
+alembic==1.20.1
+
+# ---------- Security ----------
+bcrypt==5.0.0
+PyJWT==2.15.1
+
+# ---------- RAG ----------
+chromadb==1.5.9
+langchain-text-splitters==1.1.3
+pypdf==7.1.0
+sentence-transformers>=3.3
+flashrank>=0.2.10
+
+# ---------- Speech / translation / TTS ----------
+faster-whisper>=1.1.0
+transformers>=4.46
+sentencepiece>=0.2.0
+ctranslate2>=4.5          # optional int8 NLLB backend
+indic-nlp-library>=0.92   # AI4Bharat IndicTrans2 text processing (transliteration, tokenising)
+sacremoses>=0.1
+edge-tts==7.3.1
+gTTS==2.5.4
+
+# ---------- LLM ----------
+google-genai==3.3.0
+
+# ---------- Disease model inference + ML utilities ----------
+onnxruntime==1.32.0
+opencv-python-headless==5.0.0.93
+numpy==2.5.4
+scikit-learn==1.9.1
+joblib==1.6.0
+
+# PyTorch is installed separately (CPU build is much smaller):
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu

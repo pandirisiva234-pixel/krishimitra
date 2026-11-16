@@ -1,0 +1,23 @@
+# ML research environment (Colab/Kaggle already have torch, torchvision, sklearn, pandas, matplotlib).
+# On a local PC install PyTorch first:  pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+torch>=2.5
+torchvision>=0.20
+onnx>=1.17
+onnxruntime>=1.20
+opencv-python-headless>=4.10
+scikit-learn>=1.5
+pandas>=2.2
+matplotlib>=3.9
+pyyaml>=6.0
+tabulate>=0.9
+pillow>=10.0
+# intent classification + evaluation
+sentence-transformers>=3.3
+joblib>=1.4
+jiwer>=3.0
+sacrebleu>=2.4
+faster-whisper>=1.1.0
+transformers>=4.46
+sentencepiece>=0.2.0
+chromadb>=1.0
+flashrank>=0.2.10

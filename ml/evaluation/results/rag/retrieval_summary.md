@@ -1,0 +1,8 @@
+| configuration            |   hit@1 |   hit@3 |   hit@5 |   MRR@10 |   questions |
+|:-------------------------|--------:|--------:|--------:|---------:|------------:|
+| A_pivot_minilm           |    0.55 |    0.75 |    0.75 |   0.6606 |          20 |
+| B_pivot_minilm_flashrank |    0.85 |    1    |    1    |   0.9    |          20 |
+| C_native_multilingual    |    0.05 |    0.05 |    0.05 |   0.0606 |          20 |
+| D_app_nllb_no_glossary   |    0.4  |    0.45 |    0.5  |   0.446  |          20 |
+| E_app_nllb_glossary      |    0.7  |    0.7  |    0.75 |   0.7125 |          20 |
+| F_app_glossary_gemini    |    0.8  |    0.95 |    0.95 |   0.8667 |          20 |

@@ -1,0 +1,10 @@
+{
+  "manifest": "data/stt_manifest.csv",
+  "configs": [
+    "general",
+    "app"
+  ],
+  "out": "results\\stt",
+  "whisper": "medium",
+  "beam": 1
+}

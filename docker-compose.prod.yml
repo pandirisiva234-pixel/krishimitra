@@ -1,0 +1,29 @@
+# Production overlay: Caddy in front for automatic HTTPS (Let's Encrypt).
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+# Needs DOMAIN in .env and the domain's DNS A-record pointing at the server.
+# Browsers only allow microphone and camera on HTTPS, so this is required for real users.
+
+services:
+  frontend:
+    ports: !reset []
+    expose:
+      - "80"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?Set DOMAIN in .env}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

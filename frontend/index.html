@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="KrishiMitra: ask farming questions by voice in your language and detect plant diseases from photos." />
+    <meta name="theme-color" content="#1f6b3a" />
+    <title>KrishiMitra — Farming Assistant</title>
+      <script>
+      // apply the saved light/dark theme before the page draws (avoids a white flash)
+      (function () {
+        var c = "system";
+        try { c = localStorage.getItem("krishimitra_theme") || "system"; } catch (e) {}
+        var dark = c === "dark" || (c === "system" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

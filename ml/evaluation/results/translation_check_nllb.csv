@@ -1,0 +1,91 @@
+﻿language,word,ok,english,translated,back_to_english
+te,blight,False,Early blight causes brown spots on old tomato leaves.,ప్రారంభ మంట పాత టమోటా ఆకులు మీద గోధుమ మచ్చలు కారణమవుతుంది.,Early inflammation causes brown spots on old tomato leaves.
+te,leaf spot,True,Bacterial leaf spot makes small dark spots on chilli leaves.,బాక్టీరియల్ ఆకుల మచ్చలు చిల్లీ ఆకులపై చిన్న చీకటి మచ్చలను సృష్టిస్తాయి.,Bacterial leaf spots create small dark spots on the leaves of Chile.
+te,powdery mildew,True,Powdery mildew forms white powder on the leaves.,పొడి మల్డ్యూ ఆకులు మీద తెలుపు పొడి ఏర్పరుస్తుంది.,The dry mold forms a white powder on the leaves.
+te,downy mildew,False,Downy mildew spreads fast in cool and wet weather.,చల్లని మరియు తడి వాతావరణంలో డౌనీ మల్డివ్ వేగంగా వ్యాపిస్తుంది.,"In cold and humid climates, Downey Maldives spreads rapidly."
+te,rust,True,Rust disease shows orange spots under the wheat leaves.,రస్ట్ వ్యాధి గోధుమ ఆకులు కింద నారింజ మచ్చలు చూపిస్తుంది.,Rust disease shows orange spots under the brown leaves.
+te,wilt,False,Fusarium wilt makes the whole plant droop and dry.,ఫ్యూసారియం విత్తనం మొత్తం మొక్కను వణుకుతుంది మరియు పొడిగా ఉంటుంది.,Fucarium seed shakes and dries the entire plant.
+te,rot,True,Root rot happens when water stays in the field for long.,నీరు పొలంలో ఎక్కువ కాలం ఉన్నప్పుడు మూల క్షయము సంభవిస్తుంది.,"When water is in the field for a long time, root rot occurs."
+te,mosaic virus,True,Mosaic virus makes the leaves curl with yellow patches.,మొజాయిక్ వైరస్ ఆకులు పసుపు మచ్చలు తో curl చేస్తుంది.,The mosaic virus curls the leaves with yellow spots.
+te,thrips,True,Thrips suck the sap from chilli leaves.,చిల్లీ ఆకులు నుండి జ్యూస్ను థ్రిప్స్ పీలుస్తాయి.,Thrips suck juice from chili leaves.
+te,whitefly,True,Whitefly spreads leaf curl virus in tomato.,వైట్ ఫ్లై టమోటాలలో ఆకు కర్ల్ వైరస్ను వ్యాప్తి చేస్తుంది.,The leaf curl spreads the virus in the white fly tomatoes.
+te,aphids,False,Aphids gather on young shoots and suck the sap.,ఎఫైడ్స్ చిన్న మొలకల మీద సేకరిస్తాయి మరియు జ్యూస్ను పీలుస్తాయి.,Ephids collect on small seedlings and suck on juice.
+te,stem borer,True,Stem borer damages the paddy stem from inside.,స్టెమ్ బోరర్ లోపలి నుండి వరి స్టెమ్కు నష్టం కలిగిస్తుంది.,Stem borer causes damage to the rice stem from within.
+te,caterpillar,False,Caterpillars eat holes in the cabbage leaves.,గుమ్మడికాయలు క్యాబేజీ ఆకులు లో రంధ్రాలు తినడానికి.,Cucumbers eat holes in cabbage leaves.
+te,mites,False,Red spider mites make the leaves look dusty and pale.,ఎర్రటి సాలెపురుగులు ఆకులు ధూళి మరియు పాలిపోయినట్లు కనిపిస్తాయి.,Red spiders appear to have dusty and burnt leaves.
+te,pest,True,Check the crop for pests every week.,ప్రతి వారం పంటను తెగుళ్లు కోసం తనిఖీ చేయండి.,Check the crop for pests every week.
+te,fungicide,False,Spray a fungicide after removing the infected leaves.,సోకిన ఆకులు తొలగించిన తర్వాత ఫంగసిడ్ను కురిపించండి.,"After removing the infected leaves, pour the fungus."
+te,insecticide,True,Use an insecticide only when the pests are many.,కీటకాలు చాలా ఉన్నప్పుడు మాత్రమే కీటక నివారణను ఉపయోగించండి.,Use pesticide only when there are many insects.
+te,pesticide,True,Wear gloves and a mask when you spray any pesticide.,ఏవైనా పురుగుమందులను స్ప్రే చేసేటప్పుడు చేతి తొడుగులు మరియు ముసుగు ధరించండి.,Wear gloves and masks when spraying any insecticides.
+te,fertilizer,True,Apply the fertilizer after the first weeding.,మొదటి గడ్డిపాలు తర్వాత ఎరువులు దరఖాస్తు చేయండి.,Apply fertilizers after the first grass.
+te,urea,True,Apply urea in two split doses.,యురియాను రెండు భాగాలుగా వర్తించండి.,Apply urea in two parts.
+te,compost,True,Mix compost into the soil before sowing.,విత్తనానికి ముందు కంపోస్ట్ను నేలలో కలపండి.,Mix compost in the soil before sowing.
+te,seedlings,False,Transplant the seedlings after twenty five days.,ఇరవై ఐదు రోజుల తర్వాత విత్తనాలను మార్పిడి చేయండి.,"After twenty-five days, the seeds should be transplanted."
+te,paddy,True,Keep two centimetres of water in the paddy field.,వరి క్షేత్రంలో రెండు సెంటీమీటర్ల నీరు ఉంచండి.,Place two centimeters of water in a rice field.
+te,groundnut,False,Groundnut needs light soil with good drainage.,"మొక్కజొన్నకు తేలికపాటి మట్టి, మంచి నీటిపారుదల అవసరం.",Corn needs light soil and good irrigation.
+te,cotton,True,Pink bollworm is a serious pest of cotton.,పింక్ బాల్ వర్మ్ అనేది పత్తికి తీవ్రమైన తెగుళ్లు.,Pink ball worms are a serious pest of cotton.
+te,chilli,True,Chilli plants need water every four days in summer.,శీతాకాలంలో చిల్లీ మొక్కలకు ప్రతి నాలుగు రోజులకు నీరు అవసరం.,"In winter, chili plants need water every four days."
+te,weeding,False,Do the first weeding twenty days after sowing.,విత్తనం విత్తన తర్వాత 20 రోజుల తర్వాత మొదటి గడ్డి విత్తనము చేయండి.,The first straw should be sown 20 days after sowing the seed.
+te,irrigation,True,Avoid overhead irrigation to stop the disease spreading.,వ్యాధి వ్యాప్తిని ఆపడానికి ఎగువన నీటిపారుదల చేయవద్దు.,Do not water the top to stop the spread of the disease.
+te,crop rotation,False,Crop rotation breaks the life cycle of soil diseases.,పంటల తిరుగుబాటు నేల వ్యాధుల జీవిత చక్రాన్ని విచ్ఛిన్నం చేస్తుంది.,Crop rebellion will break the life cycle of soil diseases.
+te,yellowing,True,Yellowing of lower leaves can mean nitrogen deficiency.,క్రింద ఉన్న ఆకులు పసుపు రంగులో మారడం వలన నైట్రోజన్ లోపం ఏర్పడుతుంది.,The underlying leaves turn yellow to cause nitrogen deficiency.
+kn,blight,False,Early blight causes brown spots on old tomato leaves.,ಹಳದಿ ಟೊಮೆಟೊ ಎಲೆಗಳಲ್ಲಿ ಆರಂಭಿಕ ಕೊಳೆತ ಕಂದು ಕಲೆಗಳನ್ನು ಉಂಟುಮಾಡುತ್ತದೆ.,Early rot on the yellow tomato leaves produces brown spots.
+kn,leaf spot,True,Bacterial leaf spot makes small dark spots on chilli leaves.,ಬ್ಯಾಕ್ಟೀರಿಯಾದ ಎಲೆಗಳ ಸ್ಪಾಟ್ ಚಿಲ್ಲಿ ಎಲೆಗಳ ಮೇಲೆ ಸಣ್ಣ ಗಾಢವಾದ ಸ್ಪಾಟ್ಗಳನ್ನು ಉಂಟುಮಾಡುತ್ತದೆ.,The bacterial leaf spot causes small dark spots on the chili leaves.
+kn,powdery mildew,True,Powdery mildew forms white powder on the leaves.,ಪುಡಿ ಕೊಳವೆ ಎಲೆಗಳ ಮೇಲೆ ಬಿಳಿ ಪುಡಿ ರೂಪಿಸುತ್ತದೆ.,The powdered tubing forms a white powder on the leaves.
+kn,downy mildew,False,Downy mildew spreads fast in cool and wet weather.,ತಂಪಾದ ಮತ್ತು ಆರ್ದ್ರ ವಾತಾವರಣದಲ್ಲಿ ಡೌನಿ ಶಿಲೀಂಧ್ರವು ವೇಗವಾಗಿ ಹರಡುತ್ತದೆ.,Down's fungus spreads rapidly in cool and humid climates.
+kn,rust,True,Rust disease shows orange spots under the wheat leaves.,ತುಕ್ಕು ರೋಗವು ಗೋಧಿ ಎಲೆಗಳ ಕೆಳಗೆ ಕಿತ್ತಳೆ ಕಲೆಗಳನ್ನು ತೋರಿಸುತ್ತದೆ.,Rust disease shows orange spots under the wheat leaves.
+kn,wilt,False,Fusarium wilt makes the whole plant droop and dry.,ಫ್ಯೂಸರಿಯಂ ಕೊಳೆತವು ಇಡೀ ಸಸ್ಯವನ್ನು ಕುಸಿಯುವಂತೆ ಮಾಡುತ್ತದೆ ಮತ್ತು ಒಣಗುತ್ತದೆ.,Fusarium rot causes the entire plant to collapse and dry.
+kn,rot,True,Root rot happens when water stays in the field for long.,ನೀರಿನ ದೀರ್ಘಕಾಲದವರೆಗೆ ಕ್ಷೇತ್ರದಲ್ಲಿ ಉಳಿಯುವಾಗ ಬೇರು ಕೊಳೆತ ಸಂಭವಿಸುತ್ತದೆ.,Root rot occurs when water remains in the field for a long time.
+kn,mosaic virus,True,Mosaic virus makes the leaves curl with yellow patches.,ಮೊಸಾಯಿಕ್ ವೈರಸ್ ಎಲೆಗಳನ್ನು ಹಳದಿ ಚುಕ್ಕೆಗಳೊಂದಿಗೆ ಸುರುಳಿ ಮಾಡುತ್ತದೆ.,The mosaic virus coils the leaves with yellow dots.
+kn,thrips,True,Thrips suck the sap from chilli leaves.,ಚಿಲಿ ಎಲೆಗಳಿಂದ ಥ್ರಿಪ್ಗಳು ರಸವನ್ನು ಹೀರುತ್ತವೆ.,Thrips from chili leaves suck the juice.
+kn,whitefly,True,Whitefly spreads leaf curl virus in tomato.,ವೈಟ್ ಫ್ಲೈ ಟೊಮ್ಯಾಟೊದಲ್ಲಿ ಎಲೆಗಳ ಸುರುಳಿಯಾಕಾರದ ವೈರಸ್ ಹರಡುತ್ತದೆ.,The white fly tomato has a curved virus of leaves.
+kn,aphids,True,Aphids gather on young shoots and suck the sap.,ಅಫೀಡ್ಗಳು ಯುವ ಎಲೆಗಳ ಮೇಲೆ ಸಂಗ್ರಹವಾಗಿರುತ್ತವೆ ಮತ್ತು ರಸವನ್ನು ಹೀರುತ್ತವೆ.,The aphids accumulate on young leaves and suck on the juice.
+kn,stem borer,True,Stem borer damages the paddy stem from inside.,ಸ್ಟೆಮ್ ಬೋರರ್ ಧಾನ್ಯದ ಸ್ಟೆಮ್ ಅನ್ನು ಒಳಗಿನಿಂದ ಹಾನಿಗೊಳಿಸುತ್ತದೆ.,The stem borer damages the grain stem from the inside.
+kn,caterpillar,True,Caterpillars eat holes in the cabbage leaves.,ಕ್ಯಾಟರ್ಪಿಲ್ಲರ್ಗಳು ಅರಳಿನ ಎಲೆಗಳಲ್ಲಿ ರಂಧ್ರಗಳನ್ನು ತಿನ್ನುತ್ತವೆ.,Caterpillars eat holes in the leaves of the flower.
+kn,mites,True,Red spider mites make the leaves look dusty and pale.,ಕೆಂಪು ಸ್ಪೈಡರ್ ಮಿಡ್ಗಳು ಎಲೆಗಳನ್ನು ಧೂಳು ಮತ್ತು ಹೊಳೆಯುವಂತೆ ಮಾಡುತ್ತದೆ.,Red spider mites make the leaves dusty and glossy.
+kn,pest,True,Check the crop for pests every week.,ಪ್ರತಿ ವಾರವೂ ಬೆಳೆಗಳನ್ನು ಕೀಟಗಳ ಮೇಲೆ ಪರಿಶೀಲಿಸಿ.,Check the crops for insects every week.
+kn,fungicide,True,Spray a fungicide after removing the infected leaves.,ಸೋಂಕಿತ ಎಲೆಗಳನ್ನು ತೆಗೆದುಹಾಕಿದ ನಂತರ ಶಿಲೀಂಧ್ರನಾಶಕವನ್ನು ಸಿಂಪಡಿಸಿ.,"After removing infected leaves, spray the fungicide."
+kn,insecticide,True,Use an insecticide only when the pests are many.,ಕೀಟನಾಶಕವನ್ನು ಕೀಟನಾಷಕಗಳು ಹೆಚ್ಚಾದಾಗ ಮಾತ್ರ ಬಳಸಿ.,Use a pesticide only when the pesticides are high.
+kn,pesticide,True,Wear gloves and a mask when you spray any pesticide.,ಯಾವುದೇ ಕೀಟನಾಶಕಗಳನ್ನು ಸಿಂಪಡಿಸುವಾಗ ಕೈಗವಸುಗಳು ಮತ್ತು ಮುಖವಾಡವನ್ನು ಧರಿಸಿ.,Wear gloves and masks when spraying any insecticides.
+kn,fertilizer,True,Apply the fertilizer after the first weeding.,ಮೊಟ್ಟಮೊದಲ ಕಸದ ನಂತರ ಗೊಬ್ಬರವನ್ನು ಅನ್ವಯಿಸಿ.,Apply fertilizers after the first trash.
+kn,urea,True,Apply urea in two split doses.,ಯುರಿಯಾವನ್ನು ಎರಡು ಡೋಸ್ಗಳಲ್ಲಿ ವಿಭಜಿಸಿ.,Divide the urea into two doses.
+kn,compost,True,Mix compost into the soil before sowing.,ಬಿತ್ತನೆ ಮಾಡುವ ಮೊದಲು ಮಣ್ಣಿನಲ್ಲಿ ಕಾಂಪೋಸ್ಟ್ ಮಿಶ್ರಣ ಮಾಡಿ.,Mix compost in the soil before sowing.
+kn,seedlings,False,Transplant the seedlings after twenty five days.,ಇಪ್ಪತ್ತೈದು ದಿನಗಳ ನಂತರ ಸಸ್ಯಗಳನ್ನು ಕಸಿ ಮಾಡಿ.,Transplant the plants after 25 days.
+kn,paddy,False,Keep two centimetres of water in the paddy field.,ಧಾನ್ಯದ ಹೊಲದಲ್ಲಿ ಎರಡು ಸೆಂಟಿಮೀಟರ್ ನೀರನ್ನು ಇರಿಸಿ.,Place two centimeters of water in the grain field.
+kn,groundnut,False,Groundnut needs light soil with good drainage.,ಗ್ರೌಂಡ್ ನಟ್ಗೆ ಹಗುರವಾದ ಮಣ್ಣಿನ ಅಗತ್ಯವಿದೆ.,Ground nuts require light soil.
+kn,cotton,False,Pink bollworm is a serious pest of cotton.,ಗುಲಾಬಿ ಬೋಲ್ವರ್ಮ್ ಕಬ್ಬಿಣದ ಗಂಭೀರ ಕೀಟವಾಗಿದೆ.,Pink bolworm is a serious iron pest.
+kn,chilli,True,Chilli plants need water every four days in summer.,ಬೇಸಿಗೆಯಲ್ಲಿ ಚಿಲ್ಲಿ ಸಸ್ಯಗಳಿಗೆ ಪ್ರತಿ ನಾಲ್ಕು ದಿನಗಳಿಗೊಮ್ಮೆ ನೀರು ಬೇಕು.,"In the summer, chili plants need water every four days."
+kn,weeding,False,Do the first weeding twenty days after sowing.,ಬಿತ್ತನೆಯ ನಂತರ ಇಪ್ಪತ್ತು ದಿನಗಳ ನಂತರ ಮೊದಲ ಗಿಡಮೂಲಿಕೆಗಳನ್ನು ಮಾಡಿ.,Make the first herbs twenty days after planting.
+kn,irrigation,True,Avoid overhead irrigation to stop the disease spreading.,ರೋಗ ಹರಡುವುದನ್ನು ತಡೆಯಲು ಮೇಲ್ಭಾಗದ ನೀರಾವರಿ ತಪ್ಪಿಸಿ.,Avoid watering the top to prevent the spread of disease.
+kn,crop rotation,True,Crop rotation breaks the life cycle of soil diseases.,ಬೆಳೆಗಳ ತಿರುಗುವಿಕೆಯು ಮಣ್ಣಿನ ರೋಗಗಳ ಜೀವನ ಚಕ್ರವನ್ನು ಮುರಿಯುತ್ತದೆ.,Crop rotation breaks the life cycle of soil diseases.
+kn,yellowing,True,Yellowing of lower leaves can mean nitrogen deficiency.,ಕೆಳಗಿನ ಎಲೆಗಳ ಹಳದಿ ಬಣ್ಣವು ಸಾರಜನಕದ ಕೊರತೆಯನ್ನು ಸೂಚಿಸಬಹುದು.,The yellow color of the underside of the leaves may indicate a lack of nitrogen.
+hi,blight,False,Early blight causes brown spots on old tomato leaves.,पुरानी टमाटर की पत्तियों पर जल्दी बुखार के कारण भूरे रंग के धब्बे पड़ते हैं।,Early fever causes brown spots on old tomato leaves.
+hi,leaf spot,True,Bacterial leaf spot makes small dark spots on chilli leaves.,बैक्टीरियल पत्ती का धब्बा चिली की पत्तियों पर छोटे-छोटे अंधेरे धब्बे बनाता है।,The bacterial leaf stain creates small dark spots on the leaves of Chile.
+hi,powdery mildew,True,Powdery mildew forms white powder on the leaves.,पत्तियों पर पाउडर मोल्ड्यू सफेद पाउडर बनाता है।,The powder mold on the leaves makes white powder.
+hi,downy mildew,False,Downy mildew spreads fast in cool and wet weather.,ठंडे और गीले मौसम में हल्दी जल्दी फैल जाती है।,Turmeric spreads rapidly in cold and wet weather.
+hi,rust,True,Rust disease shows orange spots under the wheat leaves.,जंग की बीमारी में गेहूं की पत्तियों के नीचे नारंगी धब्बे दिखाई देते हैं।,"In rust disease, orange spots appear under the wheat leaves."
+hi,wilt,False,Fusarium wilt makes the whole plant droop and dry.,फ्यूसरियम विलाप पूरे पौधे को गिरने और सूखने देता है।,Fusarium weeping causes the whole plant to fall and dry.
+hi,rot,True,Root rot happens when water stays in the field for long.,जड़ सड़ना तब होता है जब पानी लंबे समय तक मैदान में रहता है।,Root rot occurs when water stays in the ground for a long time.
+hi,mosaic virus,True,Mosaic virus makes the leaves curl with yellow patches.,मोज़ेक वायरस से पत्तियां पीले धब्बे से घुंघरा जाती हैं।,Mosaic virus causes the leaves to become yellow spots.
+hi,thrips,True,Thrips suck the sap from chilli leaves.,चिली के पत्तों से जूस चूसने वाले थ्रिप्स।,Thrips sucking juice from Chilean leaves.
+hi,whitefly,True,Whitefly spreads leaf curl virus in tomato.,वाइटफ्लाई टमाटर में पत्ती कर्ल वायरस फैलाता है।,The leaf curl virus spreads in the whitefly tomato.
+hi,aphids,True,Aphids gather on young shoots and suck the sap.,एफ़िड युवा झाड़ियों पर इकट्ठे होते हैं और रस चूसने लगते हैं।,The aphids gather on young bushes and start sucking juice.
+hi,stem borer,True,Stem borer damages the paddy stem from inside.,स्टेम बोरर से धान के स्टेम को अंदर से नुकसान होता है।,Stem borer damages the stem of the rice from the inside.
+hi,caterpillar,False,Caterpillars eat holes in the cabbage leaves.,मच्छर कबाब की पत्तियों में छेद खाते हैं।,The mosquitoes eat holes in the leaves of the cabbage.
+hi,mites,False,Red spider mites make the leaves look dusty and pale.,लाल मकड़ियों के खंभे पत्तियों को धूलदार और फीका दिखाते हैं।,The columns of red spiders show the leaves to be dusty and faded.
+hi,pest,True,Check the crop for pests every week.,हर हफ्ते कीटों की फसल की जांच करें।,Check the insect crop every week.
+hi,fungicide,True,Spray a fungicide after removing the infected leaves.,संक्रमित पत्तियों को हटाने के बाद एक कवकनाशक छिड़कें।,Spray a fungicide after removing the infected leaves.
+hi,insecticide,True,Use an insecticide only when the pests are many.,कीटनाशकों की संख्या अधिक होने पर ही कीटनाशक का प्रयोग करें।,Use pesticides only when there is a high number of pesticides.
+hi,pesticide,True,Wear gloves and a mask when you spray any pesticide.,किसी भी कीटनाशक को छिड़कते समय दस्ताने और मास्क पहनें।,Wear gloves and masks when spraying any pesticides.
+hi,fertilizer,True,Apply the fertilizer after the first weeding.,पहली खरपतवार काटने के बाद उर्वरक लगाएं।,Apply fertilizer after cutting the first weed.
+hi,urea,True,Apply urea in two split doses.,यूरिया को दो विभाजित खुराक में लागू करें।,Apply urea in two divided doses.
+hi,compost,False,Mix compost into the soil before sowing.,बोने से पहले मिट्टी में खाद मिलाएं।,Mix fertilizers in the soil before sowing.
+hi,seedlings,False,Transplant the seedlings after twenty five days.,पौधों का प्रत्यारोपण पच्चीस दिनों के बाद किया जाता है।,The transplantation of plants is carried out after twenty - five days.
+hi,paddy,True,Keep two centimetres of water in the paddy field.,धान के खेत में दो सेंटीमीटर पानी रखें।,Keep two centimeters of water in the rice field.
+hi,groundnut,False,Groundnut needs light soil with good drainage.,मिट्टी की नट को अच्छी तरह से निचोड़ने वाली हल्की मिट्टी की आवश्यकता होती है।,The nuts of the soil require light soil that is well squeezed.
+hi,cotton,True,Pink bollworm is a serious pest of cotton.,गुलाबी बुलबुला सूती का एक गंभीर कीटनाशक है।,Pink bubble is a serious cotton pesticide.
+hi,chilli,True,Chilli plants need water every four days in summer.,गर्मियों में चिली के पौधों को हर चार दिन में पानी की जरूरत होती है।,"In summer, Chilean plants need water every four days."
+hi,weeding,True,Do the first weeding twenty days after sowing.,बीज बोने के बीस दिन बाद पहली बार खरपतवार काटें।,Harvest weeds for the first time after 20 days of sowing.
+hi,irrigation,True,Avoid overhead irrigation to stop the disease spreading.,रोग के प्रसार को रोकने के लिए ओवरहेड सिंचाई से बचें।,Avoid overhead irrigation to prevent the spread of disease.
+hi,crop rotation,True,Crop rotation breaks the life cycle of soil diseases.,फसल रोटेशन मिट्टी की बीमारियों के जीवन चक्र को तोड़ता है।,Crop rotation breaks the life cycle of soil diseases.
+hi,yellowing,True,Yellowing of lower leaves can mean nitrogen deficiency.,नीचे की पत्तियों का पीलापन नाइट्रोजन की कमी का संकेत हो सकता है।,The yellowing of the undersides of the leaves may indicate a lack of nitrogen.

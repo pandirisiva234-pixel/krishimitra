@@ -1,0 +1,97 @@
+{
+  "data_file": "data/intents_seed.csv",
+  "examples": 240,
+  "train": 192,
+  "test": 48,
+  "class_counts": {
+    "crop_cultivation": 30,
+    "pest_disease": 30,
+    "fertilizer_soil": 30,
+    "irrigation_water": 30,
+    "weather": 30,
+    "harvest_storage": 30,
+    "greeting": 30,
+    "other": 30
+  },
+  "date": "2026-11-13",
+  "models": {
+    "tfidf": {
+      "cv_macro_f1_mean": 0.6116,
+      "cv_macro_f1_std": 0.0616,
+      "test_accuracy": 0.5625,
+      "test_macro_f1": 0.5643,
+      "per_class": {
+        "crop_cultivation": {
+          "precision": 0.25,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.2857142857142857,
+          "support": 6.0
+        },
+        "fertilizer_soil": {
+          "precision": 0.42857142857142855,
+          "recall": 0.5,
+          "f1-score": 0.46153846153846156,
+          "support": 6.0
+        },
+        "greeting": {
+          "precision": 0.7142857142857143,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.7692307692307693,
+          "support": 6.0
+        },
+        "harvest_storage": {
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.6666666666666666,
+          "support": 6.0
+        },
+        "irrigation_water": {
+          "precision": 0.6666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4444444444444444,
+          "support": 6.0
+        },
+        "other": {
+          "precision": 0.6666666666666666,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.4444444444444444,
+          "support": 6.0
+        },
+        "pest_disease": {
+          "precision": 0.4444444444444444,
+          "recall": 0.6666666666666666,
+          "f1-score": 0.5333333333333333,
+          "support": 6.0
+        },
+        "weather": {
+          "precision": 1.0,
+          "recall": 0.8333333333333334,
+          "f1-score": 0.9090909090909091,
+          "support": 6.0
+        },
+        "accuracy": 0.5625,
+        "macro avg": {
+          "precision": 0.6046626984126984,
+          "recall": 0.5625,
+          "f1-score": 0.5643079143079144,
+          "support": 48.0
+        },
+        "weighted avg": {
+          "precision": 0.6046626984126983,
+          "recall": 0.5625,
+          "f1-score": 0.5643079143079143,
+          "support": 48.0
+        }
+      }
+    },
+    "keyword_rules": {
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_std": null,
+      "test_accuracy": 0.7708,
+      "test_macro_f1": 0.7601,
+      "note": "Keywords and seed questions were written by the same author, so this score is likely optimistic."
+    }
+  },
+  "selected": "keyword_rules",
+  "decision": "Best ML model (tfidf, test macro-F1 0.5643) does not beat the keyword rules (0.7601). No model saved; the backend keeps using keyword rules. Add more labelled questions and re-run."
+}

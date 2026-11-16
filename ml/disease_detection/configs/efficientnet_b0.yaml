@@ -1,0 +1,19 @@
+# Training config for efficientnet_b0. Paths are relative to ml/disease_detection.
+run_name: efficientnet_b0
+model: efficientnet_b0
+train_csv: splits/train.csv
+val_csv: splits/val.csv
+results_dir: results
+image_size: 224
+batch_size: 64
+pretrained: true
+head_epochs: 3       # stage 1: train only the new classifier
+epochs: 15           # stage 2: fine-tune the whole network
+lr: 0.001            # stage 1 learning rate (stage 2 uses lr x finetune_lr_factor)
+finetune_lr_factor: 0.1
+patience: 4
+weight_decay: 0.0001
+label_smoothing: 0.1
+class_weights: true   # counter class imbalance found in EDA
+num_workers: 2
+seed: 42

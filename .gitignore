@@ -1,0 +1,46 @@
+# Secrets
+.env
+backend/.env
+frontend/.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Data, models and runtime files (large or personal; never commit)
+datasets/
+storage/
+knowledge_base/chroma_db/
+knowledge_base/documents/*.pdf
+trained_models/*
+!trained_models/README.md
+ml/disease_detection/splits/
+ml/disease_detection/results/*/best.pt
+backups/
+# Personal voice recordings used for the speech test (the CSV with the reference text is kept)
+ml/evaluation/data/recordings/*
+!ml/evaluation/data/recordings/.keep
+# Local backup archives
+*.zip
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# More secrets and local files (added before the first GitHub push)
+kaggle.json
+**/kaggle.json
+.coverage
+.ruff_cache/
+*.log
+ml/evaluation/results/*.csv.bak

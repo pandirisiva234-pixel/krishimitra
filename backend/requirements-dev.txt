@@ -1,0 +1,9 @@
+-r requirements.txt
+pytest==9.2.0
+respx==0.23.1
+onnx==1.23.2
+jiwer==4.0.0
+sacrebleu==2.6.0
+pyyaml>=6.0
+tabulate==0.10.0
+pandas==3.1.1
