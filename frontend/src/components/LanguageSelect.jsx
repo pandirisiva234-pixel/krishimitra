@@ -5,7 +5,7 @@ let cache = null;
 
 // Tested with real farmers' recordings: Telugu (20 questions), Hindi, Kannada, English. Others work
 // end to end but have not been evaluated yet, so they are marked "beta".
-export const TESTED_LANGUAGES = ["te", "hi", "kn", "en"];
+export const TESTED_LANGUAGES = ["te", "hi", "kn", "ta", "gu", "en"];
 
 export function languageLabel(l) {
   const base = l.native_name === l.name ? l.name : `${l.native_name} (${l.name})`;
