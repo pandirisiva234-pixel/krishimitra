@@ -69,6 +69,12 @@ class Settings(BaseSettings):
     OPENWEATHER_API_KEY: str | None = None
     WEATHER_CACHE_MINUTES: int = 30
 
+    # ---- Related videos (YouTube Data API v3, free key from console.cloud.google.com) ----
+    # Empty = the "Related videos" section is simply hidden.
+    YOUTUBE_API_KEY: str | None = None
+    VIDEO_CACHE_MINUTES: int = 360
+    VIDEO_MAX_RESULTS: int = 3
+
     # ---- Speech ---------------------------------------------------------
     WHISPER_MODEL_SIZE: str = "small"  # tiny | base | small | medium | large-v3
     WHISPER_DEVICE: str = "cpu"  # cpu | cuda

@@ -32,6 +32,11 @@ export const assistant = {
   speak: (body) => data(api.post("/api/assistant/speak", body)),
   translate: (text, languageCode) =>
     data(api.post("/api/assistant/translate", { text, language_code: languageCode }, { timeout: 120000 })),
+  videos: (q, languageCode, original) =>
+    data(api.get("/api/assistant/videos", {
+      params: { q, language_code: languageCode, ...(original ? { original } : {}) },
+      timeout: 30000,
+    })),
   feedback: (body) => data(api.post("/api/feedback", body)),
   fetchBlob: (url) => api.get(url, { responseType: "blob" }).then((r) => r.data),
 };

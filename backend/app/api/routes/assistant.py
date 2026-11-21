@@ -1,5 +1,5 @@
 """Voice transcription, assistant questions, text-to-speech and feedback."""
-from fastapi import APIRouter, Depends, File, Form, Request, UploadFile
+from fastapi import APIRouter, Depends, File, Form, Query as QueryParam, Request, UploadFile
 from fastapi.responses import FileResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -15,6 +15,7 @@ from app.schemas.auth import MessageResponse
 from app.services.assistant import AssistantService, audio_url
 from app.services.container import ServiceContainer
 from app.services.language_service import get_language
+from app.services.videos.youtube_client import plan_search
 from app.utils.files import read_validated_upload, safe_child
 
 settings = get_settings()
@@ -89,6 +90,28 @@ async def translate_text(
         return {"text": body.text, "language_code": "en"}
     text = await assistant.translate(body.text, "eng_Latn", lang.nllb_code)
     return {"text": text, "language_code": lang.code}
+
+
+@router.get("/videos")
+@limiter.limit(settings.RATE_LIMIT_TTS)
+async def related_videos(
+    request: Request,
+    q: str = QueryParam(..., min_length=2, max_length=500, description="The question in English"),
+    language_code: str = QueryParam("en", max_length=8),
+    original: str | None = QueryParam(None, max_length=500, description="The question as the farmer asked it"),
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+    services: ServiceContainer = Depends(get_services),
+):
+    """Up to 3 related YouTube videos for a farming question, searched in the farmer's language.
+    Only videos that name the crop are kept; trusted farming channels (DD Kisan, ICAR, KVKs) come first.
+    Returns {"enabled": false} when no YouTube key is set, so the app just hides the section."""
+    if not services.videos.is_configured:
+        return {"enabled": False, "query": None, "videos": []}
+    lang = get_language(db, language_code)
+    plan = await plan_search(services.llm, q, original, lang.name, timeout=settings.LLM_REFINE_TIMEOUT_S)
+    result = await services.videos.related_videos(q, lang.code, plan)
+    return {"enabled": True, **result}
 
 
 @router.get("/audio/{filename}")

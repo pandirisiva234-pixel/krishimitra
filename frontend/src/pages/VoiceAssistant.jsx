@@ -5,6 +5,7 @@ import { AlertCircle, Languages, Mic, Plus, Send, Square, ThumbsDown, ThumbsUp, 
 import { errorMessage } from "../api/client";
 import { assistant, conversations } from "../api/endpoints";
 import LanguageSelect from "../components/LanguageSelect";
+import RelatedVideos from "../components/RelatedVideos";
 import SourceList from "../components/SourceList";
 import SpeechQueue from "../components/SpeechQueue";
 import { Card, EmptyState, PageHeader, Spinner } from "../components/ui";
@@ -80,6 +81,13 @@ function Message({ m, onFeedback, conversationLanguage }) {
           />
         )}
         <SourceList sources={m.sources} />
+        <RelatedVideos
+          question={m.question_english}
+          original={m.question}
+          languageCode={m.language_code || conversationLanguage}
+          intent={m.intent}
+          autoLoad={!!m.fresh}
+        />
         {m.response_id && (
           <div className="feedback">
             {m.feedback ? (

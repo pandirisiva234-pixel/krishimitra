@@ -17,6 +17,7 @@ from app.services.speech.whisper_stt import SpeechToText
 from app.services.translation.indictrans_translator import FallbackTranslator, IndicTransTranslator
 from app.services.translation.nllb_translator import Translator
 from app.services.tts.edge_tts_service import TextToSpeech
+from app.services.videos.youtube_client import YouTubeClient
 from app.services.weather.openweather_client import OpenWeatherClient
 from app.services.weather.service import WeatherService
 
@@ -58,6 +59,8 @@ class ServiceContainer:
         self.tts = TextToSpeech(s.tts_dir)
         self.disease = DiseasePredictor(s.disease_model_path, s.disease_labels_path)
         self.weather = WeatherService(OpenWeatherClient(s.OPENWEATHER_API_KEY), s.WEATHER_CACHE_MINUTES)
+        self.videos = YouTubeClient(s.YOUTUBE_API_KEY, cache_minutes=s.VIDEO_CACHE_MINUTES,
+                                    max_results=s.VIDEO_MAX_RESULTS)
 
     def models_loaded(self) -> dict[str, bool]:
         return {
