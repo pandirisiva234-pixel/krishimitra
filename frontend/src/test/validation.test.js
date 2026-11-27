@@ -59,14 +59,18 @@ describe("API error messages", () => {
 });
 
 import { warnLabel } from "../pages/VoiceAssistant";
+import { translate } from "../i18n";
 
 describe("warnLabel", () => {
   it("names why an answer is not from the documents", () => {
-    expect(warnLabel({ answer_english: "I am KrishiMitra, a farming assistant. I can..." })).toBe("Outside farming");
-    expect(warnLabel({ answer_english: "Feed well.\n\nThis is general advice, not from KrishiMitra's verified documents." }))
+    const label = (en) => translate(warnLabel({ answer_english: en }), null, "en");
+    expect(label("I am KrishiMitra, a farming assistant. I can...")).toBe("Outside farming");
+    expect(label("Feed well.\n\nThis is general advice, not from KrishiMitra's verified documents."))
       .toBe("General advice, not from verified documents");
-    expect(warnLabel({ answer_english: "I could not find information about this in the KrishiMitra knowledge base" }))
+    expect(label("I could not find information about this in the KrishiMitra knowledge base"))
       .toBe("Not in the knowledge base");
+    expect(translate(warnLabel({ answer_english: "I am KrishiMitra, a farming assistant." }), null, "te"))
+      .toBe("వ్యవసాయానికి సంబంధం లేనిది");
   });
 });
 

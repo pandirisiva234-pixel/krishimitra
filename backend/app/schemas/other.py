@@ -148,6 +148,10 @@ class FarmerDashboardOut(BaseModel):
     recent_questions: list[RecentQuestion]
     recent_predictions: list[RecentPrediction]
     has_location: bool
+    # chart data: questions per day (last 14 days, zero days included), topics, leaf scan outcomes
+    activity_14d: list["CountItem"] = []
+    topics: list["CountItem"] = []
+    scan_outcomes: list["CountItem"] = []
 
 
 class CountItem(BaseModel):
@@ -175,6 +179,16 @@ class AdminStatisticsOut(BaseModel):
     input_modes: list[CountItem]
     avg_response_ms: float | None
     grounded_answer_pct: float | None
+    # chart data added for the visual overview
+    registrations_per_day: list[CountItem] = []
+    response_seconds_per_day: list["ValueItem"] = []
+    feedback: list[CountItem] = []
+    scan_outcomes: list[CountItem] = []
+
+
+class ValueItem(BaseModel):
+    label: str
+    value: float
 
 
 class AdminUserOut(BaseModel):

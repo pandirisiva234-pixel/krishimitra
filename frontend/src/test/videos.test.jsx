@@ -58,6 +58,11 @@ describe("RelatedVideos", () => {
     expect(await screen.findByText("Maize pest tips")).toBeInTheDocument();
   });
 
+  it("is hidden for price answers", () => {
+    const { container } = render(<RelatedVideos question="tomato price" intent="market_price" autoLoad />);
+    expect(container).toBeEmptyDOMElement();
+  });
+
   it("is hidden for greetings and weather", () => {
     const { container } = render(<RelatedVideos question="hello" intent="greeting" autoLoad />);
     expect(container).toBeEmptyDOMElement();

@@ -7,13 +7,15 @@ import { Card, EmptyState, PageHeader, Spinner } from "../components/ui";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import { formatDate } from "../utils/format";
+import { useI18n } from "../i18n";
 
 export default function Knowledge() {
   const { user } = useAuth();
+  const { t, lang } = useI18n();
   const toast = useToast();
   const [docs, setDocs] = useState([]);
   const [query, setQuery] = useState("");
-  const [language, setLanguage] = useState(user.preferred_language.code);
+  const [language, setLanguage] = useState(lang || user.preferred_language.code);
   const [results, setResults] = useState(null);
   const [busy, setBusy] = useState(false);
 
@@ -39,8 +41,8 @@ export default function Knowledge() {
   return (
     <div>
       <PageHeader
-        title="Agricultural knowledge base"
-        subtitle="Search the guides the assistant reads. These passages are exactly what answers are built from."
+        title={t("kb.title")}
+        subtitle={t("kb.subtitle")}
       />
       <Card>
         <form className="search-row" onSubmit={search}>
@@ -49,44 +51,44 @@ export default function Knowledge() {
             className="input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="e.g. gypsum for groundnut, paddy stem borer control"
+            placeholder={t("kb.placeholder")}
           />
           <button className="btn btn-primary" disabled={busy}>
-            {busy ? <Spinner label="Searching…" size={16} /> : (<><Search size={18} /> Search</>)}
+            {busy ? <Spinner label={t("kb.searching")} size={16} /> : (<><Search size={18} /> {t("common.search")}</>)}
           </button>
         </form>
       </Card>
 
       {results && (
-        <Card title={`Results for “${results.query_english}”`} className="mt">
+        <Card title={t("kb.results", { q: results.query_english })} className="mt">
           {results.results.length ? (
             <ol className="passages">
               {results.results.map((r) => (
                 <li key={`${r.document_id}-${r.index}`}>
                   <div className="passage-head">
                     <FileText size={16} /> <strong>{r.title}</strong>
-                    {r.page && <span className="muted"> · page {r.page}</span>}
-                    <span className="tag">relevance {r.score?.toFixed(2)}</span>
+                    {r.page && <span className="muted"> · {t("kb.page")} {r.page}</span>}
+                    <span className="tag">{t("kb.relevance")} {r.score?.toFixed(2)}</span>
                   </div>
                   <p>{r.snippet}</p>
                 </li>
               ))}
             </ol>
           ) : (
-            <p className="muted">Nothing relevant found. Try other words, or ask the admin to add documents on this topic.</p>
+            <p className="muted">{t("kb.nothing")}</p>
           )}
         </Card>
       )}
 
-      <Card title={`Documents (${indexed.length})`} icon={BookOpen} className="mt">
+      <Card title={t("kb.documents", { n: indexed.length })} icon={BookOpen} className="mt">
         {indexed.length ? (
           <table className="table">
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Pages</th>
-                <th>Added</th>
-                <th>Source</th>
+                <th>{t("kb.colTitle")}</th>
+                <th>{t("kb.colPages")}</th>
+                <th>{t("kb.colAdded")}</th>
+                <th>{t("kb.colSource")}</th>
               </tr>
             </thead>
             <tbody>
@@ -98,7 +100,7 @@ export default function Knowledge() {
                   <td>
                     {d.source_url ? (
                       <a href={d.source_url} target="_blank" rel="noreferrer">
-                        Open <ExternalLink size={12} />
+                        {t("kb.open")} <ExternalLink size={12} />
                       </a>
                     ) : (
                       "—"
@@ -109,8 +111,8 @@ export default function Knowledge() {
             </tbody>
           </table>
         ) : (
-          <EmptyState icon={BookOpen} title="No documents yet">
-            An administrator needs to upload agricultural PDFs first.
+          <EmptyState icon={BookOpen} title={t("kb.noDocs")}>
+            {t("kb.adminUpload")}
           </EmptyState>
         )}
       </Card>

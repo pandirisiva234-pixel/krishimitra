@@ -13,12 +13,14 @@ import { useSpeech } from "../context/SpeechContext";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import useRecorder from "../hooks/useRecorder";
-import { intentLabel, splitForSpeech } from "../utils/format";
+import { splitForSpeech } from "../utils/format";
+import { useI18n } from "../i18n";
 
 const EXAMPLES = [
   "టమాటా ఆకులపై మచ్చలు ఉన్నాయి, ఏమి చేయాలి?",
   "धान में यूरिया कब डालें?",
   "Is it a good day to spray pesticide?",
+  "ఈరోజు టమాటా ధర ఎంత?",
 ];
 
 const OPEN_KEY = "krishimitra_open_conversation";
@@ -42,32 +44,33 @@ function rememberConversation(id) {
 // Why an answer is not from the verified documents (the backend's fixed English replies tell us)
 export function warnLabel(m) {
   const en = m.answer_english || "";
-  if (en.startsWith("I am KrishiMitra, a farming assistant")) return "Outside farming";
-  if (en.includes("not from KrishiMitra's verified documents")) return "General advice, not from verified documents";
-  if (en.includes("could not find information")) return "Not in the knowledge base";
+  if (en.startsWith("I am KrishiMitra, a farming assistant")) return "warn.outsideFarming";
+  if (en.includes("not from KrishiMitra's verified documents")) return "warn.generalAdvice";
+  if (en.includes("could not find information")) return "warn.notInKb";
   if (en.startsWith("Please set your farm location")) return null;
-  return "Not from the knowledge base";
+  return "warn.notFromKb";
 }
 
 function Message({ m, onFeedback, conversationLanguage }) {
+  const { t } = useI18n();
   const [showEnglish, setShowEnglish] = useState(false);
   return (
     <div className="exchange">
       <div className="bubble bubble-user" dir="auto">
-        {m.input_mode === "voice" && <Mic size={14} aria-label="Spoken question" />} {m.question}
+        {m.input_mode === "voice" && <Mic size={14} aria-label={t("assistant.spoken")} />} {m.question}
       </div>
       <div className={`bubble bubble-bot ${m.grounded === false ? "bubble-warn" : ""}`}>
         <p className="answer-text" dir="auto">{showEnglish ? m.answer_english : m.answer}</p>
         <div className="answer-meta">
-          {m.intent && <span className="tag">{intentLabel(m.intent)}</span>}
+          {m.intent && <span className="tag">{t(`intent.${m.intent}`)}</span>}
           {m.grounded === false && m.intent !== "greeting" && warnLabel(m) && (
             <span className="tag tag-warn">
-              <AlertCircle size={12} /> {warnLabel(m)}
+              <AlertCircle size={12} /> {t(warnLabel(m))}
             </span>
           )}
           {m.answer_english && m.answer_english !== m.answer && (
             <button className="link-btn" onClick={() => setShowEnglish(!showEnglish)}>
-              <Languages size={14} /> {showEnglish ? "Show in my language" : "Show in English"}
+              <Languages size={14} /> {showEnglish ? t("common.showMine") : t("common.showEnglish")}
             </button>
           )}
         </div>
@@ -91,14 +94,14 @@ function Message({ m, onFeedback, conversationLanguage }) {
         {m.response_id && (
           <div className="feedback">
             {m.feedback ? (
-              <span className="muted small">Thanks for your feedback</span>
+              <span className="muted small">{t("assistant.thanks")}</span>
             ) : (
               <>
-                <span className="muted small">Was this helpful?</span>
-                <button className="icon-btn" aria-label="Helpful" onClick={() => onFeedback(m, true)}>
+                <span className="muted small">{t("assistant.helpful")}</span>
+                <button className="icon-btn" aria-label={t("assistant.yes")} onClick={() => onFeedback(m, true)}>
                   <ThumbsUp size={16} />
                 </button>
-                <button className="icon-btn" aria-label="Not helpful" onClick={() => onFeedback(m, false)}>
+                <button className="icon-btn" aria-label={t("assistant.no")} onClick={() => onFeedback(m, false)}>
                   <ThumbsDown size={16} />
                 </button>
               </>
@@ -112,10 +115,11 @@ function Message({ m, onFeedback, conversationLanguage }) {
 
 export default function VoiceAssistant() {
   const { user } = useAuth();
+  const { t, tm, lang: uiLang } = useI18n();
   const toast = useToast();
   const [params, setParams] = useSearchParams();
   const recorder = useRecorder();
-  const [language, setLanguage] = useState(user?.preferred_language?.code || "en");
+  const [language, setLanguage] = useState(uiLang || user?.preferred_language?.code || "en");
   const [speak, setSpeak] = useState(true);
   const [text, setText] = useState("");
   const [audioId, setAudioId] = useState(null);
@@ -145,11 +149,16 @@ export default function VoiceAssistant() {
       })
       .catch(() => {
         rememberConversation(null); // deleted or not ours: start fresh
-        if (params.get("c")) toast.error("This conversation could not be opened.");
+        if (params.get("c")) toast.error(t("assistant.cannotOpen"));
       });
   }, [params, toast]);
 
   useEffect(() => rememberConversation(conversationId), [conversationId]);
+
+  // A new chat answers in the interface language, so changing the app language also changes the answer language
+  useEffect(() => {
+    if (!conversationId && messages.length === 0) setLanguage(uiLang);
+  }, [uiLang]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Question sent from another page (e.g. "Ask KrishiMitra about this disease"): ask it once, automatically
   const askedFromLink = useRef(false);
@@ -247,11 +256,11 @@ export default function VoiceAssistant() {
   return (
     <div className="assistant-page">
       <PageHeader
-        title="Voice assistant"
-        subtitle="Hold a conversation about your crops. Tap the mic, speak, check the text, then ask."
+        title={t("assistant.title")}
+        subtitle={t("assistant.subtitle")}
         actions={
           <button className="btn btn-ghost" onClick={newConversation}>
-            <Plus size={18} /> New conversation
+            <Plus size={18} /> {t("assistant.new")}
           </button>
         }
       />
@@ -259,8 +268,8 @@ export default function VoiceAssistant() {
       <Card className="chat-card">
         <div className="chat-log">
           {messages.length === 0 && !stage && (
-            <EmptyState icon={Mic} title="Ask your first question">
-              <p>Try one of these:</p>
+            <EmptyState icon={Mic} title={t("assistant.firstQuestion")}>
+              <p>{t("assistant.tryThese")}</p>
               <div className="chips">
                 {EXAMPLES.map((ex) => (
                   <button key={ex} className="chip" onClick={() => setText(ex)}>
@@ -275,7 +284,7 @@ export default function VoiceAssistant() {
           ))}
           {stage === "thinking" && (
             <div className="bubble bubble-bot">
-              <Spinner label="Finding the answer in the knowledge base…" />
+              <Spinner label={t("assistant.finding")} />
             </div>
           )}
           <div ref={bottomRef} />
@@ -284,22 +293,22 @@ export default function VoiceAssistant() {
         <div className="composer">
           <div className="composer-row">
             <div className="field-inline">
-              <label htmlFor="lang">Answer in</label>
+              <label htmlFor="lang">{t("assistant.answerIn")}</label>
               <LanguageSelect id="lang" value={language} onChange={setLanguage} />
             </div>
             <label className="toggle">
               <input type="checkbox" checked={speak} onChange={(e) => setSpeak(e.target.checked)} />
-              <Volume2 size={16} /> Speak answers
+              <Volume2 size={16} /> {t("assistant.speak")}
             </label>
           </div>
 
           {transcriptInfo && (
             <p className="muted small">
-              Heard in {transcriptInfo.language_code.toUpperCase()}
+              {t("assistant.heardIn", { lang: transcriptInfo.language_code.toUpperCase() })}{" "}
               {transcriptInfo.used_fallback_language
-                ? " (unsure of the language, so the selected language was used)"
-                : ` (${Math.round(transcriptInfo.language_probability * 100)}% sure)`}
-              . Correct the text below if needed.
+                ? t("assistant.unsureLang")
+                : t("assistant.sure", { pct: Math.round(transcriptInfo.language_probability * 100) })}
+              . {t("assistant.correct")}
             </p>
           )}
 
@@ -309,7 +318,7 @@ export default function VoiceAssistant() {
               className={`mic-btn ${recording ? "recording" : ""}`}
               onClick={recording ? recorder.stop : recorder.start}
               disabled={stage !== null}
-              aria-label={recording ? "Stop recording" : "Start recording"}
+              aria-label={recording ? t("assistant.stopRec") : t("assistant.startRec")}
               style={{ "--level": recorder.level }}
             >
               {recording ? <Square size={22} /> : <Mic size={24} />}
@@ -320,10 +329,10 @@ export default function VoiceAssistant() {
               value={recording ? "" : text}
               placeholder={
                 recording
-                  ? `Listening… ${recorder.seconds}s / ${recorder.maxSeconds}s`
+                  ? `${t("assistant.listening")} ${recorder.seconds}s / ${recorder.maxSeconds}s`
                   : stage === "transcribing"
-                    ? "Converting your speech to text…"
-                    : "Type your question, or tap the microphone"
+                    ? t("assistant.converting")
+                    : t("assistant.placeholder")
               }
               onChange={(e) => {
                 setText(e.target.value);
@@ -338,10 +347,10 @@ export default function VoiceAssistant() {
               disabled={recording || stage !== null}
             />
             <button className="btn btn-primary" onClick={() => ask()} disabled={!text.trim() || stage !== null}>
-              <Send size={18} /> Ask
+              <Send size={18} /> {t("assistant.ask")}
             </button>
           </div>
-          {recorder.error && <p className="field-msg">{recorder.error}</p>}
+          {recorder.error && <p className="field-msg">{tm(recorder.error)}</p>}
         </div>
       </Card>
     </div>

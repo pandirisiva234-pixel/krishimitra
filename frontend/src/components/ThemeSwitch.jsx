@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Laptop, Moon, Sun } from "lucide-react";
 import { applyTheme, savedTheme } from "../context/theme";
+import { useI18n } from "../i18n";
 
 const OPTIONS = [
-  { value: "light", label: "Light mode", icon: Sun },
-  { value: "dark", label: "Dark mode", icon: Moon },
-  { value: "system", label: "Use device setting", icon: Laptop },
+  { value: "light", label: "theme.light", icon: Sun },
+  { value: "dark", label: "theme.dark", icon: Moon },
+  { value: "system", label: "theme.system", icon: Laptop },
 ];
 
 export default function ThemeSwitch({ onDark = false }) {
+  const { t } = useI18n();
   const [choice, setChoice] = useState(savedTheme);
 
   useEffect(() => {
@@ -22,9 +24,9 @@ export default function ThemeSwitch({ onDark = false }) {
   }, [choice]);
 
   return (
-    <div className={`theme-switch ${onDark ? "on-dark" : ""}`} role="group" aria-label="Colour theme">
+    <div className={`theme-switch ${onDark ? "on-dark" : ""}`} role="group" aria-label={t("theme.label")}>
       {OPTIONS.map(({ value, label, icon: Icon }) => (
-        <button key={value} type="button" title={label} aria-label={label} aria-pressed={choice === value}
+        <button key={value} type="button" title={t(label)} aria-label={t(label)} aria-pressed={choice === value}
           onClick={() => setChoice(value)}>
           <Icon size={16} />
         </button>

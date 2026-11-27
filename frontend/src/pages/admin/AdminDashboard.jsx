@@ -1,63 +1,55 @@
+// Admin overview: a few headline numbers, then charts. System health is shown as status lights.
 import { useCallback, useEffect, useState } from "react";
 import {
+  Area,
+  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
   Cell,
-  Line,
-  LineChart,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import { Activity, BookOpen, Cpu, Leaf, MessageSquare, ThumbsUp, UserCheck, Users } from "lucide-react";
+import { Activity, Cpu, Gauge as GaugeIcon, Leaf, MessageSquare, ThumbsUp, UserPlus, Users } from "lucide-react";
 import { errorMessage } from "../../api/client";
 import { admin } from "../../api/endpoints";
-import { Card, EmptyState, ErrorBanner, PageHeader, PageLoader, StatCard } from "../../components/ui";
-import { intentLabel } from "../../utils/format";
+import { ChartBox, COLORS, DayBars, Donut, Gauge, OUTCOME_COLORS, shortDay } from "../../components/Charts";
+import { Card, ErrorBanner, PageHeader, PageLoader, StatCard } from "../../components/ui";
+import { useI18n } from "../../i18n";
 
-const COLORS = ["#1f6b3a", "#d9822b", "#3a7ca5", "#8a5a44", "#7a9a3a", "#b04a5a", "#5a5a8a", "#999"];
+const FEEDBACK_COLORS = { helpful: "#2e8b57", not_helpful: "#c0392b" };
 
-function ChartOrEmpty({ data, children, height = 260 }) {
-  if (!data?.length) return <EmptyState title="No data yet for this period" />;
+function StatusLights({ status }) {
+  const lights = [
+    ["Database", status.database === "ok", "PostgreSQL"],
+    ["Knowledge store", status.vector_store === "ok", status.vector_chunks != null ? `${status.vector_chunks} chunks` : "ChromaDB"],
+    ["Gemini AI", status.gemini_configured, status.gemini_model || "API key missing"],
+    ["Weather", status.openweather_configured, "OpenWeather"],
+    ["Disease model", status.disease_model_available, status.disease_model_available ? "ready" : "missing"],
+    ["Intent model", status.intent_model_available, status.intent_model_available ? "trained" : "keyword rules"],
+  ];
+  const used = status.storage_used_mb;
   return (
-    <div className="chart">
-      <ResponsiveContainer width="100%" height={height}>
-        {children}
-      </ResponsiveContainer>
+    <div>
+      <ul className="status-lights">
+        {lights.map(([name, ok, detail]) => (
+          <li key={name} className={ok ? "ok" : "bad"} title={detail}>
+            <span className="light" aria-hidden />
+            <span className="status-name">{name}</span>
+            <span className="status-detail">{detail}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="muted small">
+        Disk free {status.disk_free_gb} GB · app storage {used} MB
+      </p>
     </div>
   );
 }
 
-function SystemStatus({ status }) {
-  const rows = [
-    ["PostgreSQL", status.database],
-    ["Vector store (ChromaDB)", `${status.vector_store}${status.vector_chunks != null ? ` · ${status.vector_chunks} chunks` : ""}`],
-    ["Gemini", status.gemini_configured ? `configured · ${status.gemini_model}` : "API key missing"],
-    ["OpenWeather", status.openweather_configured ? "configured" : "API key missing"],
-    ["Disease model", status.disease_model_available ? "available" : "not trained/copied yet"],
-    ["Intent model", status.intent_model_available ? "trained model" : "keyword rules"],
-    ["Models in memory", Object.entries(status.models_loaded).filter(([, v]) => v).map(([k]) => k).join(", ") || "none yet (load on first use)"],
-    ["Disk free", `${status.disk_free_gb} GB · storage used ${status.storage_used_mb} MB`],
-  ];
-  return (
-    <table className="table compact">
-      <tbody>
-        {rows.map(([k, v]) => (
-          <tr key={k}>
-            <th>{k}</th>
-            <td>{v}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-
 export default function AdminDashboard() {
+  const { t, lang } = useI18n();
   const [days, setDays] = useState(30);
   const [state, setState] = useState(null);
   const [error, setError] = useState(null);
@@ -73,13 +65,22 @@ export default function AdminDashboard() {
   if (error) return <ErrorBanner message={error} onRetry={load} />;
   if (!state) return <PageLoader label="Loading statistics…" />;
   const { dash, stats, system } = state;
-  const intents = stats.intent_distribution.map((i) => ({ ...i, label: intentLabel(i.label) }));
+  const intents = stats.intent_distribution.map((i) => ({ ...i, label: t(`intent.${i.label}`) }));
+  const languages = stats.language_usage.map((l) => ({ name: l.label, count: l.count }));
+  const modes = stats.input_modes.map((m) => ({ name: m.label === "voice" ? "Spoken" : "Typed", count: m.count }));
+  const feedback = (stats.feedback || []).map((f) => ({
+    key: f.label,
+    name: f.label === "helpful" ? "Helpful" : "Not helpful",
+    count: f.count,
+  }));
+  const scans = (stats.scan_outcomes || []).map((s) => ({ key: s.label, name: t(`scan.${s.label}`), count: s.count }));
+  const speed = (stats.response_seconds_per_day || []).map((d) => ({ ...d, day: shortDay(d.label, lang) }));
+  const avgSeconds = stats.avg_response_ms != null ? +(stats.avg_response_ms / 1000).toFixed(1) : null;
 
   return (
-    <div>
+    <div className="admin-overview">
       <PageHeader
         title="Admin overview"
-        subtitle="Live numbers from the database."
         actions={
           <select className="select" value={days} onChange={(e) => setDays(Number(e.target.value))} aria-label="Period">
             <option value={7}>Last 7 days</option>
@@ -89,77 +90,92 @@ export default function AdminDashboard() {
           </select>
         }
       />
+
       <div className="stats-grid">
-        <StatCard label="Registered farmers" value={dash.total_farmers} hint={`+${dash.new_users_30d} new in 30 days`} icon={Users} />
-        <StatCard label="Active users (7 days)" value={dash.active_users_7d} icon={UserCheck} tone="blue" />
-        <StatCard label="Total questions" value={dash.total_queries} hint={`${dash.queries_today} today`} icon={MessageSquare} tone="amber" />
-        <StatCard label="Disease scans" value={dash.total_disease_scans} icon={Leaf} tone="leaf" />
-        <StatCard label="Indexed documents" value={dash.total_documents} icon={BookOpen} />
-        <StatCard label="Helpful answers" value={dash.helpful_feedback_pct != null ? `${dash.helpful_feedback_pct}%` : "—"} hint="from farmer feedback" icon={ThumbsUp} tone="blue" />
-        <StatCard label="Answers from sources" value={stats.grounded_answer_pct != null ? `${stats.grounded_answer_pct}%` : "—"} icon={BookOpen} tone="amber" />
-        <StatCard label="Avg response time" value={stats.avg_response_ms != null ? `${(stats.avg_response_ms / 1000).toFixed(1)} s` : "—"} icon={Activity} tone="leaf" />
+        <StatCard label="Farmers" value={dash.total_farmers} hint={`+${dash.new_users_30d} in 30 days`} icon={Users} />
+        <StatCard label="Active (7 days)" value={dash.active_users_7d} icon={Activity} tone="blue" />
+        <StatCard label="Questions" value={dash.total_queries} hint={`${dash.queries_today} today`} icon={MessageSquare} tone="amber" />
+        <StatCard label="Leaf scans" value={dash.total_disease_scans} hint={`${dash.total_documents} documents`} icon={Leaf} tone="leaf" />
+      </div>
+
+      <div className="gauge-row">
+        <Card>
+          <Gauge value={stats.grounded_answer_pct} label="Answers from documents" color="#1f6b3a" />
+        </Card>
+        <Card>
+          <Gauge value={dash.helpful_feedback_pct} label="Helpful (farmer votes)" color="#3a7ca5" />
+        </Card>
+        <Card>
+          <Gauge
+            value={avgSeconds == null ? null : Math.min(100, Math.round((avgSeconds / 60) * 100))}
+            display={avgSeconds == null ? null : `${avgSeconds} s`}
+            label="Average answer time (ring = share of 1 minute)"
+            color={avgSeconds != null && avgSeconds > 30 ? "#c0392b" : "#d9822b"}
+          />
+        </Card>
       </div>
 
       <div className="grid-2">
         <Card title="Questions per day" icon={Activity}>
-          <ChartOrEmpty data={stats.queries_per_day}>
-            <LineChart data={stats.queries_per_day}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" />
-              <XAxis dataKey="label" tick={{ fontSize: 11 }} />
-              <YAxis allowDecimals={false} tick={{ fontSize: 11 }} width={36} />
-              <Tooltip />
-              <Line dataKey="count" name="Questions" stroke="#1f6b3a" strokeWidth={2} />
-            </LineChart>
-          </ChartOrEmpty>
+          <DayBars data={stats.queries_per_day} lang={lang} name="Questions" />
         </Card>
-        <Card title="Language usage" icon={MessageSquare}>
-          <ChartOrEmpty data={stats.language_usage}>
-            <PieChart>
-              <Pie data={stats.language_usage} dataKey="count" nameKey="label" outerRadius={95} label>
-                {stats.language_usage.map((_, i) => (
-                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ChartOrEmpty>
+        <Card title="New farmers per day" icon={UserPlus}>
+          <DayBars data={stats.registrations_per_day || []} lang={lang} name="Registrations" color="#3a7ca5" />
         </Card>
-        <Card title="Question topics (intents)" icon={MessageSquare}>
-          <ChartOrEmpty data={intents}>
-            <BarChart data={intents} layout="vertical" margin={{ left: 30 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" />
+        <Card title="Languages used" icon={MessageSquare}>
+          <Donut data={languages} centerLabel="questions" />
+        </Card>
+        <Card title="Question topics" icon={MessageSquare}>
+          <ChartBox data={intents} height={240}>
+            <BarChart data={intents} layout="vertical" margin={{ left: 10, right: 16 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" horizontal={false} />
               <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} />
               <YAxis type="category" dataKey="label" tick={{ fontSize: 11 }} width={120} />
               <Tooltip />
-              <Bar dataKey="count" name="Questions" fill="#d9822b" />
+              <Bar dataKey="count" name="Questions" radius={[0, 4, 4, 0]}>
+                {intents.map((_, i) => (
+                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                ))}
+              </Bar>
             </BarChart>
-          </ChartOrEmpty>
+          </ChartBox>
+        </Card>
+        <Card title="Answer time per day (seconds)" icon={GaugeIcon}>
+          <ChartBox data={speed} height={220}>
+            <AreaChart data={speed} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" vertical={false} />
+              <XAxis dataKey="day" tick={{ fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11 }} width={30} unit="s" />
+              <Tooltip />
+              <Area dataKey="value" name="Average seconds" stroke="#d9822b" fill="#d9822b" fillOpacity={0.25} strokeWidth={2} />
+            </AreaChart>
+          </ChartBox>
+        </Card>
+        <Card title="Spoken vs typed" icon={MessageSquare}>
+          <Donut data={modes} centerLabel="questions" />
+        </Card>
+        <Card title="Leaf scan results" icon={Leaf}>
+          <Donut data={scans} colors={OUTCOME_COLORS} centerLabel="scans" />
+        </Card>
+        <Card title="Farmer feedback" icon={ThumbsUp}>
+          <Donut data={feedback} colors={FEEDBACK_COLORS} centerLabel="votes" />
         </Card>
         <Card title="Most detected diseases" icon={Leaf}>
-          <ChartOrEmpty data={stats.disease_distribution}>
-            <BarChart data={stats.disease_distribution} layout="vertical" margin={{ left: 30 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" />
+          <ChartBox data={stats.disease_distribution} height={240}>
+            <BarChart data={stats.disease_distribution} layout="vertical" margin={{ left: 10, right: 16 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" horizontal={false} />
               <XAxis type="number" allowDecimals={false} tick={{ fontSize: 11 }} />
               <YAxis type="category" dataKey="label" tick={{ fontSize: 11 }} width={160} />
               <Tooltip />
-              <Bar dataKey="count" name="Scans" fill="#1f6b3a" />
+              <Bar dataKey="count" name="Scans" fill="#1f6b3a" radius={[0, 4, 4, 0]} />
             </BarChart>
-          </ChartOrEmpty>
+          </ChartBox>
         </Card>
-        <Card title="System status" icon={Cpu}>
-          <SystemStatus status={system} />
-        </Card>
-        <Card title="Voice vs typed" icon={MessageSquare}>
-          <ChartOrEmpty data={stats.input_modes} height={200}>
-            <BarChart data={stats.input_modes}>
-              <XAxis dataKey="label" />
-              <YAxis allowDecimals={false} width={36} />
-              <Tooltip />
-              <Bar dataKey="count" name="Questions" fill="#3a7ca5" />
-            </BarChart>
-          </ChartOrEmpty>
+        <Card title="System health" icon={Cpu}>
+          <StatusLights status={system} />
         </Card>
       </div>
     </div>
   );
 }
+

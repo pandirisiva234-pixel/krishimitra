@@ -75,6 +75,10 @@ class Settings(BaseSettings):
     VIDEO_CACHE_MINUTES: int = 360
     VIDEO_MAX_RESULTS: int = 3
 
+    # ---- Mandi prices (Agmarknet via data.gov.in, free key from data.gov.in -> My Account) ----
+    DATAGOV_API_KEY: str | None = None
+    MANDI_CACHE_MINUTES: int = 60
+
     # ---- Speech ---------------------------------------------------------
     WHISPER_MODEL_SIZE: str = "small"  # tiny | base | small | medium | large-v3
     WHISPER_DEVICE: str = "cpu"  # cpu | cuda

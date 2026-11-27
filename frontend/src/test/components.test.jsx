@@ -43,9 +43,14 @@ describe("ConfidenceBar", () => {
 describe("SourceList", () => {
   it("lists sources with page numbers", () => {
     render(<SourceList sources={[{ index: 1, title: "Paddy guide", page: 4, snippet: "Keep 5 cm water", kind: "document" }]} />);
-    expect(screen.getByText("1 source")).toBeInTheDocument();
-    expect(screen.getByText("[1] Paddy guide, p. 4")).toBeInTheDocument();
+    expect(screen.getByText("Sources (1)")).toBeInTheDocument();
+    expect(screen.getByText("[1] Paddy guide, page 4")).toBeInTheDocument();
   });
+  it("shows market price sources", () => {
+    render(<SourceList sources={[{ index: 1, title: "Agmarknet daily mandi prices (data.gov.in)", snippet: "Tomato modal 1200", kind: "market" }]} />);
+    expect(screen.getByText("Sources (1)")).toBeInTheDocument();
+  });
+
   it("renders nothing without sources", () => {
     const { container } = render(<SourceList sources={[]} />);
     expect(container).toBeEmptyDOMElement();

@@ -8,6 +8,8 @@ import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
 import ThemeSwitch from "../components/ThemeSwitch";
 import { normalisePhone, validateRegistration } from "../utils/validation";
+import { useI18n } from "../i18n";
+import UiLanguageSwitch from "../components/UiLanguageSwitch";
 
 const EMPTY = {
   full_name: "",
@@ -24,8 +26,9 @@ const EMPTY = {
 
 export default function Register() {
   const { register } = useAuth();
+  const { t, tm, lang } = useI18n();
   const navigate = useNavigate();
-  const [form, setForm] = useState(EMPTY);
+  const [form, setForm] = useState({ ...EMPTY, preferred_language: lang === "en" ? EMPTY.preferred_language : lang });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -34,7 +37,7 @@ export default function Register() {
 
   const submit = async (e) => {
     e.preventDefault();
-    const found = validateRegistration(form);
+    const found = Object.fromEntries(Object.entries(validateRegistration(form)).map(([k, v]) => [k, tm(v)]));
     setErrors(found);
     if (Object.keys(found).length) return;
     setBusy(true);
@@ -59,57 +62,57 @@ export default function Register() {
         <Link to="/" className="auth-topbar">
           <Logo size={30} tagline={null} tone="light" />
         </Link>
-        <ThemeSwitch onDark />
+        <span className="row-tight"><UiLanguageSwitch onDark /><ThemeSwitch onDark /></span>
       </div>
       <div className="auth-page">
       <form className="auth-card auth-card-wide" onSubmit={submit} noValidate>
         <Link to="/" className="brand auth-brand">
           <Logo size={56} />
         </Link>
-        <h1>Create your account</h1>
-        <p className="muted">It takes a minute. Your mobile number is your login.</p>
+        <h1>{t("register.title")}</h1>
+        <p className="muted">{t("register.subtitle")}</p>
         {serverError && (
           <div className="banner banner-error" role="alert">
             {serverError}
           </div>
         )}
         <div className="grid-2">
-          <Field label="Full name" htmlFor="full_name" error={errors.full_name}>
+          <Field label={t("form.fullName")} htmlFor="full_name" error={errors.full_name}>
             <input id="full_name" className="input" value={form.full_name} onChange={set("full_name")} autoComplete="name" />
           </Field>
-          <Field label="Mobile number" htmlFor="phone" error={errors.phone}>
+          <Field label={t("form.mobile")} htmlFor="phone" error={errors.phone}>
             <input id="phone" className="input" inputMode="tel" value={form.phone} onChange={set("phone")} autoComplete="tel" />
           </Field>
-          <Field label="Email (optional)" htmlFor="email" error={errors.email}>
+          <Field label={t("form.emailOptional")} htmlFor="email" error={errors.email}>
             <input id="email" type="email" className="input" value={form.email} onChange={set("email")} autoComplete="email" />
           </Field>
-          <Field label="Preferred language" htmlFor="language" hint="Answers will be spoken in this language">
+          <Field label={t("form.language")} htmlFor="language" hint={t("register.langHint")}>
             <LanguageSelect value={form.preferred_language} onChange={(v) => setForm({ ...form, preferred_language: v })} />
           </Field>
-          <Field label="Password" htmlFor="password" error={errors.password} hint="8+ characters, a letter and a number">
+          <Field label={t("form.password")} htmlFor="password" error={errors.password} hint={t("form.passwordHint")}>
             <input id="password" type="password" className="input" value={form.password} onChange={set("password")} autoComplete="new-password" />
           </Field>
-          <Field label="Confirm password" htmlFor="confirm" error={errors.confirm}>
+          <Field label={t("form.confirmPassword")} htmlFor="confirm" error={errors.confirm}>
             <input id="confirm" type="password" className="input" value={form.confirm} onChange={set("confirm")} autoComplete="new-password" />
           </Field>
-          <Field label="State" htmlFor="state">
+          <Field label={t("form.state")} htmlFor="state">
             <input id="state" className="input" value={form.state} onChange={set("state")} placeholder="Andhra Pradesh" />
           </Field>
-          <Field label="District" htmlFor="district">
+          <Field label={t("form.district")} htmlFor="district">
             <input id="district" className="input" value={form.district} onChange={set("district")} placeholder="Guntur" />
           </Field>
-          <Field label="Village (optional)" htmlFor="village">
+          <Field label={t("form.villageOptional")} htmlFor="village">
             <input id="village" className="input" value={form.village} onChange={set("village")} />
           </Field>
-          <Field label="Main crops (optional)" htmlFor="crops" hint="Comma separated, e.g. paddy, chilli">
+          <Field label={t("form.cropsOptional")} htmlFor="crops" hint={t("register.cropsHint")}>
             <input id="crops" className="input" value={form.primary_crops} onChange={set("primary_crops")} />
           </Field>
         </div>
         <button className="btn btn-primary btn-block btn-large" disabled={busy}>
-          {busy ? <Spinner label="Creating account…" /> : (<><UserPlus size={18} /> Register</>)}
+          {busy ? <Spinner label={t("register.busy")} /> : (<><UserPlus size={18} /> {t("register.button")}</>)}
         </button>
         <p className="auth-switch">
-          Already registered? <Link to="/login">Log in</Link>
+          {t("register.already")} <Link to="/login">{t("login.button")}</Link>
         </p>
       </form>
       </div>

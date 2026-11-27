@@ -37,6 +37,28 @@ TIMING_WORDS = ("today", "tomorrow", "tonight", "this week", "next few days", "g
 FIELD_WORK = ("spray", "pesticide", "insecticide", "fungicide", "fertilizer", "urea", "irrigat", "sow", "harvest")
 
 
+# Market price questions are recognised by rule (the trained model has no such class):
+# "price", "mandi", "market rate", "selling rate"... but not "seed rate" or "spray rate".
+MARKET_RE = re.compile(
+    r"\b(prices?|mandi|mandis|apmc|market (?:rate|value)s?|selling rate|sale rate|"
+    r"(?:today'?s|current|present) rates?|rates? (?:of|for) (?!seed|fertili[sz]er|urea|spray|application))",
+    re.IGNORECASE,
+)
+NOT_MARKET = re.compile(r"\b(seed rate|spray rate|application rate|dose|dosage)\b", re.IGNORECASE)
+
+
+MANDI_WORDS = re.compile(r"\b(mandi|mandis|apmc|agmarknet)\b", re.IGNORECASE)
+
+
+def is_market_question(text: str) -> bool:
+    """A price word plus a crop (or the word mandi/APMC), so "price of gold" is not a crop-price question."""
+    from app.services.market.mandi import find_crop  # local import: the market module is optional
+
+    if not MARKET_RE.search(text) or NOT_MARKET.search(text):
+        return False
+    return bool(MANDI_WORDS.search(text) or find_crop(text))
+
+
 @dataclass
 class IntentResult:
     intent: str
@@ -45,6 +67,8 @@ class IntentResult:
 
 
 def keyword_intent(text: str) -> IntentResult:
+    if is_market_question(text):
+        return IntentResult("market_price", None, "keywords")
     lowered = text.lower()
     words = re.findall(r"[a-z\-]+", lowered)
     if any(t in lowered for t in TIMING_WORDS) and any(f in lowered for f in FIELD_WORK):
@@ -88,6 +112,8 @@ class IntentClassifier:
         return self._bundle
 
     def predict(self, text_en: str) -> IntentResult:
+        if is_market_question(text_en):
+            return IntentResult("market_price", 1.0, "rule")
         if not self.is_available:
             if not self._missing_logged:
                 logger.warning("Intent model not found at %s; using keyword fallback", self.model_path)

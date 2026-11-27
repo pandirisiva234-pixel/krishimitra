@@ -2,12 +2,14 @@
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { assistant } from "../api/endpoints";
+import { useI18n } from "../i18n";
 
-export function Spinner({ label = "Loading…", size = 20 }) {
+export function Spinner({ label, size = 20 }) {
+  const { t } = useI18n();
   return (
     <span className="spinner" role="status">
       <Loader2 size={size} className="spin" aria-hidden />
-      <span>{label}</span>
+      <span>{label ?? t("common.loading")}</span>
     </span>
   );
 }
@@ -76,13 +78,14 @@ export function EmptyState({ icon: Icon, title, children }) {
 }
 
 export function ErrorBanner({ message, onRetry }) {
+  const { t } = useI18n();
   if (!message) return null;
   return (
     <div className="banner banner-error" role="alert">
       <span>{message}</span>
       {onRetry && (
         <button className="btn btn-small" onClick={onRetry}>
-          Retry
+          {t("common.retry")}
         </button>
       )}
     </div>
@@ -93,7 +96,7 @@ export function ConfidenceBar({ value }) {
   const pctValue = Math.round((value || 0) * 100);
   const tone = pctValue >= 80 ? "high" : pctValue >= 60 ? "mid" : "low";
   return (
-    <div className="confidence" aria-label={`Confidence ${pctValue}%`}>
+    <div className="confidence" aria-label={`${pctValue}%`}>
       <div className={`confidence-fill confidence-${tone}`} style={{ width: `${pctValue}%` }} />
       <span>{pctValue}%</span>
     </div>
@@ -124,15 +127,17 @@ function useAuthBlob(url) {
 }
 
 export function AuthAudio({ url, autoPlay = false }) {
+  const { t } = useI18n();
   const { src, failed } = useAuthBlob(url);
-  if (failed) return <span className="muted small">Audio unavailable</span>;
-  if (!src) return <Spinner label="Preparing audio…" size={16} />;
+  if (failed) return <span className="muted small">{t("speech.unavailable")}</span>;
+  if (!src) return <Spinner label={t("speech.preparing")} size={16} />;
   return <audio controls autoPlay={autoPlay} src={src} className="audio" />;
 }
 
 export function AuthImage({ url, alt, className }) {
+  const { t } = useI18n();
   const { src, failed } = useAuthBlob(url);
-  if (failed) return <div className={`img-placeholder ${className || ""}`}>Image unavailable</div>;
+  if (failed) return <div className={`img-placeholder ${className || ""}`}>{t("photo.unavailable")}</div>;
   if (!src) return <div className={`img-placeholder ${className || ""}`} />;
   return <img src={src} alt={alt} className={className} />;
 }

@@ -7,6 +7,7 @@ from sqlalchemy import Date, cast, func, or_, select, text
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_services, require_admin
+from app.api.routes.dashboard import fill_days, scan_outcome_counts
 from app.core.config import get_settings
 from app.core.exceptions import AppError, NotFoundError
 from app.db.session import get_db
@@ -105,7 +106,26 @@ def statistics(
                func.count(Response.id).filter(Response.grounded.is_(True)))
         .join(Query, Response.query_id == Query.id).where(Query.created_at >= since)
     ).one()
+    reg_day = cast(User.created_at, Date)
+    registrations = db.execute(
+        select(reg_day, func.count(User.id)).where(User.role == ROLE_FARMER, User.created_at >= since)
+        .group_by(reg_day)
+    ).all()
+    resp_day = cast(Query.created_at, Date)
+    speed = db.execute(
+        select(resp_day, func.avg(Response.total_ms)).join(Query, Response.query_id == Query.id)
+        .where(Query.created_at >= since, Response.total_ms.is_not(None)).group_by(resp_day).order_by(resp_day)
+    ).all()
+    votes = db.execute(
+        select(Feedback.is_helpful, func.count(Feedback.id)).where(Feedback.created_at >= since)
+        .group_by(Feedback.is_helpful)
+    ).all()
+    chart_days = min(days, 90)
     return {
+        "registrations_per_day": fill_days(registrations, chart_days),
+        "response_seconds_per_day": [{"label": d.isoformat(), "value": round(float(ms) / 1000, 1)} for d, ms in speed],
+        "feedback": [{"label": "helpful" if ok else "not_helpful", "count": int(n)} for ok, n in votes],
+        "scan_outcomes": scan_outcome_counts(db, DiseasePrediction.created_at >= since),
         "language_usage": pairs(language_usage),
         "intent_distribution": pairs(intents),
         "disease_distribution": pairs(diseases),

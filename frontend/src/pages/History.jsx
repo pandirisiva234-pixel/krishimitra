@@ -6,9 +6,11 @@ import { conversations } from "../api/endpoints";
 import SourceList from "../components/SourceList";
 import { AuthAudio, Card, EmptyState, ErrorBanner, PageHeader, PageLoader } from "../components/ui";
 import { useToast } from "../context/ToastContext";
-import { formatDateTime, intentLabel } from "../utils/format";
+import { formatDateTime } from "../utils/format";
+import { useI18n } from "../i18n";
 
 export default function History() {
+  const { t } = useI18n();
   const toast = useToast();
   const [list, setList] = useState(null);
   const [error, setError] = useState(null);
@@ -27,26 +29,26 @@ export default function History() {
       .catch((e) => toast.error(errorMessage(e)));
 
   const remove = async (id) => {
-    if (!window.confirm("Delete this conversation? This cannot be undone.")) return;
+    if (!window.confirm(t("history.confirmDelete"))) return;
     try {
       await conversations.remove(id);
       setList((l) => l.filter((c) => c.id !== id));
       if (selected?.id === id) setSelected(null);
-      toast.success("Conversation deleted");
+      toast.success(t("history.deleted"));
     } catch (e) {
       toast.error(errorMessage(e));
     }
   };
 
   if (error) return <ErrorBanner message={error} onRetry={load} />;
-  if (!list) return <PageLoader label="Loading history…" />;
+  if (!list) return <PageLoader label={t("history.loading")} />;
 
   return (
     <div>
-      <PageHeader title="Conversation history" subtitle="Every question you asked, with the answer and its sources." />
+      <PageHeader title={t("history.title")} subtitle={t("history.subtitle")} />
       {list.length === 0 ? (
-        <EmptyState icon={HistoryIcon} title="No conversations yet">
-          <Link to="/assistant">Ask your first question</Link>
+        <EmptyState icon={HistoryIcon} title={t("history.none")}>
+          <Link to="/assistant">{t("assistant.firstQuestion")}</Link>
         </EmptyState>
       ) : (
         <div className="history-layout">
@@ -58,9 +60,9 @@ export default function History() {
                     {c.title}
                   </button>
                   <span className="list-meta">
-                    {c.message_count} message{c.message_count !== 1 ? "s" : ""} · {c.language_code.toUpperCase()} ·{" "}
+                    {t("history.messages", { n: c.message_count })} · {c.language_code.toUpperCase()} ·{" "}
                     {formatDateTime(c.updated_at)}
-                    <button className="icon-btn" aria-label="Delete conversation" onClick={() => remove(c.id)}>
+                    <button className="icon-btn" aria-label={t("history.delete")} onClick={() => remove(c.id)}>
                       <Trash2 size={15} />
                     </button>
                   </span>
@@ -70,9 +72,9 @@ export default function History() {
           </Card>
           <Card
             className="history-detail"
-            title={selected ? selected.title : "Select a conversation"}
+            title={selected ? selected.title : t("history.select")}
             icon={MessageSquare}
-            actions={selected && <Link to={`/assistant?c=${selected.id}`} className="btn btn-small">Continue</Link>}
+            actions={selected && <Link to={`/assistant?c=${selected.id}`} className="btn btn-small">{t("history.continue")}</Link>}
           >
             {selected ? (
               selected.messages.map((m) => (
@@ -81,9 +83,9 @@ export default function History() {
                   <div className="bubble bubble-bot">
                     <p className="answer-text">{m.answer}</p>
                     <div className="answer-meta">
-                      <span className="tag">{intentLabel(m.intent)}</span>
+                      <span className="tag">{t(`intent.${m.intent || "other"}`)}</span>
                       <span className="muted small">
-                        {m.input_mode === "voice" ? "Spoken" : "Typed"} · {formatDateTime(m.created_at)}
+                        {m.input_mode === "voice" ? t("history.spoken") : t("history.typed")} · {formatDateTime(m.created_at)}
                       </span>
                     </div>
                     {m.audio_url && <AuthAudio url={m.audio_url} />}
@@ -92,7 +94,7 @@ export default function History() {
                 </div>
               ))
             ) : (
-              <p className="muted">Choose a conversation on the left.</p>
+              <p className="muted">{t("history.chooseLeft")}</p>
             )}
           </Card>
         </div>

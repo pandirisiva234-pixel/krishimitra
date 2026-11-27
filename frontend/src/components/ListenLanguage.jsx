@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { Languages } from "lucide-react";
 import { assistant } from "../api/endpoints";
 import LanguageSelect from "./LanguageSelect";
+import { useI18n } from "../i18n";
 
 export default function ListenLanguage({ value, onChange, id = "listen-lang" }) {
+  const { t } = useI18n();
   return (
     <div className="field-inline listen-language">
       <label htmlFor={id}>
-        <Languages size={16} aria-hidden /> Language
+        <Languages size={16} aria-hidden /> {t("dash.language")}
       </label>
       <LanguageSelect id={id} value={value} onChange={onChange} />
     </div>

@@ -5,6 +5,7 @@ export const INTENT_LABELS = {
   irrigation_water: "Irrigation",
   weather: "Weather",
   harvest_storage: "Harvest & storage",
+  market_price: "Market prices",
   greeting: "Greeting",
   other: "Other",
 };

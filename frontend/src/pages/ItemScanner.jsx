@@ -12,12 +12,14 @@ import { useAuth } from "../context/AuthContext";
 import { useSpeech } from "../context/SpeechContext";
 import { useToast } from "../context/ToastContext";
 import { splitForSpeech } from "../utils/format";
+import { useI18n } from "../i18n";
 
 const MAX_MB = 5;
 const SPEECH_PREFIX = "item-";
 const TOX_CLASS = { red: "tox-red", yellow: "tox-yellow", blue: "tox-blue", green: "tox-green" };
 
 function ItemResult({ item, listenLanguage, onLanguage }) {
+  const { t } = useI18n();
   const [english, setEnglish] = useState(false);
   const lang = listenLanguage || item.language_code;
   const translated = useTranslatedText(item.summary_english, lang, { [item.language_code]: item.summary });
@@ -28,38 +30,38 @@ function ItemResult({ item, listenLanguage, onLanguage }) {
       <div className="result-head uncertain">
         <AlertTriangle size={22} />
         <div>
-          <div className="result-title">Not a farm product</div>
+          <div className="result-title">{t("items.notFarm")}</div>
           <div className="small">{text}</div>
         </div>
       </div>
     );
   }
   const rows = [
-    ["Active ingredient", item.active_ingredient],
-    ["Used for", item.used_for],
-    ["Meant for", item.targets],
-    ["How to use", item.how_to_use],
-    ["Safety", item.safety],
+    [t("items.ingredient"), item.active_ingredient],
+    [t("items.usedFor"), item.used_for],
+    [t("items.meantFor"), item.targets],
+    [t("items.howTo"), item.how_to_use],
+    [t("items.safety"), item.safety],
   ].filter(([, v]) => v);
   return (
     <div className="item-result">
       <div className="result-head diseased">
         <FlaskConical size={22} />
         <div>
-          <div className="result-title">{item.product_name || "Farm item"}</div>
+          <div className="result-title">{item.product_name || t("items.farmItem")}</div>
           <div className="small">
             <span className="tag capitalize">{item.category}</span>{" "}
             {item.toxicity_colour && (
               <span className={`tag tox ${TOX_CLASS[item.toxicity_colour]}`}>
-                ◆ {item.toxicity_colour} label · {item.toxicity_meaning}
+                ◆ {item.toxicity_colour} {t("items.label")} · {item.toxicity_meaning}
               </span>
             )}{" "}
-            <span className="muted">Confidence: {item.confidence}</span>
+            <span className="muted">{t("disease.confidence")}: {item.confidence}</span>
           </div>
         </div>
       </div>
       {!item.label_readable && (
-        <p className="banner banner-error small">The label was hard to read. Take a closer, sharper photo of the label.</p>
+        <p className="banner banner-error small">{t("items.hardToRead")}</p>
       )}
       <table className="table compact mt">
         <tbody>
@@ -76,12 +78,12 @@ function ItemResult({ item, listenLanguage, onLanguage }) {
           <ListenLanguage value={listenLanguage} onChange={onLanguage} id="item-lang" />
           {lang !== "en" && (
             <button className="link-btn" onClick={() => setEnglish(!english)}>
-              {english ? "Show in my language" : "Show in English"}
+              {english ? t("common.showMine") : t("common.showEnglish")}
             </button>
           )}
         </div>
         {translated.loading && !showEnglish ? (
-          <Spinner label="Translating…" size={16} />
+          <Spinner label={t("common.translating")} size={16} />
         ) : (
           <>
             <p className="answer-text">{text}</p>
@@ -89,14 +91,13 @@ function ItemResult({ item, listenLanguage, onLanguage }) {
               id={`item-${item.product_name || "unknown"}-${item.summary.length}-${showEnglish ? "en" : lang}`}
               chunks={splitForSpeech(text)}
               languageCode={showEnglish ? "en" : lang}
-              label={item.product_name || "Farm item"}
+              label={item.product_name || t("items.farmItem")}
             />
           </>
         )}
       </div>
       <p className="muted small">
-        <ShieldAlert size={14} /> Information is read from the photo by AI and may be wrong. Always follow the dose
-        printed on the label, and check with your agriculture officer or veterinary doctor before use.
+        <ShieldAlert size={14} /> {t("items.disclaimer")}
       </p>
     </div>
   );
@@ -104,6 +105,7 @@ function ItemResult({ item, listenLanguage, onLanguage }) {
 
 export default function ItemScanner() {
   const { user } = useAuth();
+  const { t, lang } = useI18n();
   const toast = useToast();
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -112,7 +114,8 @@ export default function ItemScanner() {
   const [result, setResult] = useState(null);
   const inputRef = useRef(null);
   const speech = useSpeech();
-  const [listenLanguage, setListenLanguage] = useState(user.preferred_language?.code || "en");
+  const [listenLanguage, setListenLanguage] = useState(lang || user.preferred_language?.code || "en");
+  useEffect(() => setListenLanguage(lang), [lang]); // follows the app language
 
   // Clear the photo and result (and stop this page's voice) to start a fresh scan
   const newScan = () => {
@@ -126,8 +129,8 @@ export default function ItemScanner() {
   useEffect(() => () => preview && URL.revokeObjectURL(preview), [preview]);
 
   const choose = (blob, name) => {
-    if (!blob.type.startsWith("image/")) return toast.error("Please choose a photo (JPG or PNG).");
-    if (blob.size > MAX_MB * 1024 * 1024) return toast.error(`Photo is larger than ${MAX_MB} MB.`);
+    if (!blob.type.startsWith("image/")) return toast.error(t("photo.choose"));
+    if (blob.size > MAX_MB * 1024 * 1024) return toast.error(t("photo.tooBig", { mb: MAX_MB }));
     setFile({ blob, name });
     setPreview(URL.createObjectURL(blob));
     setResult(null);
@@ -148,16 +151,16 @@ export default function ItemScanner() {
   return (
     <div>
       <PageHeader
-        title="Farm item scanner"
-        subtitle="Photograph a pesticide bottle, fertilizer bag, seed packet, animal medicine or tool. Keep the label visible."
+        title={t("nav.items")}
+        subtitle={t("items.subtitle")}
         actions={
           <button className="btn btn-ghost" onClick={newScan} disabled={!file && !result}>
-            <Plus size={18} /> New scan
+            <Plus size={18} /> {t("photo.newScan")}
           </button>
         }
       />
       <div className="grid-2">
-        <Card title="Item photo" icon={ImagePlus}>
+        <Card title={t("items.photo")} icon={ImagePlus}>
           {camera ? (
             <CameraCapture onCapture={(blob) => choose(blob, "camera.jpg")} onClose={() => setCamera(false)} />
           ) : (
@@ -176,12 +179,12 @@ export default function ItemScanner() {
                 onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
               >
                 {preview ? (
-                  <img src={preview} alt="Selected item" />
+                  <img src={preview} alt={t("items.photo")} />
                 ) : (
                   <div className="dropzone-empty">
                     <PackageSearch size={36} />
-                    <p>Tap to choose a photo of the item, or drop it here</p>
-                    <p className="muted small">Label facing the camera · JPG or PNG, up to {MAX_MB} MB</p>
+                    <p>{t("items.tapToChoose")}</p>
+                    <p className="muted small">{t("items.labelFacing")} · {t("photo.formats", { mb: MAX_MB })}</p>
                   </div>
                 )}
               </div>
@@ -199,21 +202,21 @@ export default function ItemScanner() {
               />
               <div className="row">
                 <button className="btn btn-ghost" onClick={() => setCamera(true)}>
-                  <Camera size={18} /> Use camera
+                  <Camera size={18} /> {t("photo.useCamera")}
                 </button>
                 <button className="btn btn-primary" onClick={identify} disabled={!file || busy}>
-                  {busy ? <Spinner label="Reading the label…" size={16} /> : (<><ScanLine size={18} /> Identify item</>)}
+                  {busy ? <Spinner label={t("items.reading")} size={16} /> : (<><ScanLine size={18} /> {t("items.identify")}</>)}
                 </button>
               </div>
             </>
           )}
         </Card>
-        <Card title="What is this?" icon={FlaskConical}>
+        <Card title={t("items.whatIs")} icon={FlaskConical}>
           {result ? (
             <ItemResult item={result} listenLanguage={listenLanguage} onLanguage={setListenLanguage} />
           ) : (
-            <EmptyState icon={PackageSearch} title="No item scanned yet">
-              Choose a photo, then tap “Identify item”.
+            <EmptyState icon={PackageSearch} title={t("items.none")}>
+              {t("items.chooseThenIdentify")}
             </EmptyState>
           )}
         </Card>

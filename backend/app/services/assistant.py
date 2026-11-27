@@ -49,6 +49,15 @@ from app.services.llm.prompts import (
 from app.services.speech.audio_utils import audio_duration_seconds, convert_to_wav16k
 from app.services.translation.language_detect import detect_language
 from app.services.weather.advisories import weather_summary_text
+from app.services.market.mandi import (
+    MARKET_SYSTEM_PROMPT,
+    SOURCE_TITLE as MANDI_SOURCE_TITLE,
+    build_market_prompt,
+    extract_query,
+    no_data_answer,
+    price_summary,
+    template_answer,
+)
 from app.services.translation.post_edit import post_edit
 from app.services.nlp.glossary import expand_query, glossary_terms
 from app.utils.timing import StageTimer
@@ -251,6 +260,8 @@ class AssistantService:
         elif intent.intent == "weather":
             answer_en, sources, grounded, model_name = await self._answer_weather(
                 db, user, english, timer, req.latitude, req.longitude)
+        elif intent.intent == "market_price":
+            answer_en, sources, grounded, model_name = await self._answer_market(user, english, timer, text)
         else:
             answer_en, sources, grounded, model_name = await self._answer_rag(
                 user, english, timer, original=(text, in_lang.name, farm_terms)
@@ -344,6 +355,36 @@ class AssistantService:
             return summary, source, True, None  # rule-based answer still works without Gemini
         with timer.stage("llm"):
             answer = await self.s.llm.generate(build_weather_prompt(english, summary), WEATHER_SYSTEM_PROMPT)
+        return answer, source, True, self.s.llm.model
+
+    async def _answer_market(self, user: User, english: str, timer: StageTimer, original: str | None = None):
+        """Today's mandi prices from Agmarknet (data.gov.in): crop + place -> prices -> short answer."""
+        if not self.s.mandi.is_configured:
+            return ("Market prices are not set up yet. Add a free data.gov.in API key (DATAGOV_API_KEY) "
+                    "to show today's mandi prices.", [], False, None)
+        with timer.stage("market_extract"):
+            q = await extract_query(self.s.llm, english, original, user.state, user.district,
+                                    timeout=self.settings.LLM_REFINE_TIMEOUT_S)
+        with timer.stage("market_prices"):
+            try:
+                result = await self.s.mandi.prices(q)
+            except Exception:  # noqa: BLE001  - a price service outage should not break the assistant
+                logger.warning("Mandi price lookup failed", exc_info=True)
+                return ("I could not reach the government market price service right now. "
+                        "Please try again in a few minutes.", [], False, None)
+        if not result["rows"]:
+            return no_data_answer(q), [], False, None
+        summary = price_summary(result)
+        source = [{"index": 1, "title": MANDI_SOURCE_TITLE, "page": None, "document_id": None,
+                   "score": None, "snippet": summary[:300], "kind": "market"}]
+        if not self.s.llm.is_configured:
+            return template_answer(result), source, True, None
+        with timer.stage("llm"):
+            try:
+                answer = await self.s.llm.generate(build_market_prompt(english, summary), MARKET_SYSTEM_PROMPT)
+            except Exception:  # noqa: BLE001
+                logger.warning("Gemini failed on the price answer; using the template", exc_info=True)
+                return template_answer(result), source, True, None
         return answer, source, True, self.s.llm.model
 
     def _save(self, db, user, req, in_lang: Language, lang: Language, lang_conf, english, intent, answer_en,

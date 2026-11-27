@@ -6,9 +6,12 @@ import { Field, Spinner } from "../components/ui";
 import { useAuth } from "../context/AuthContext";
 import Logo from "../components/Logo";
 import ThemeSwitch from "../components/ThemeSwitch";
+import { useI18n } from "../i18n";
+import UiLanguageSwitch from "../components/UiLanguageSwitch";
 
 export default function Login() {
   const { login } = useAuth();
+  const { t } = useI18n();
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState({ username: "", password: "" });
@@ -18,7 +21,7 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     if (!form.username.trim() || !form.password) {
-      setError("Enter your mobile number (or email) and password");
+      setError(t("login.missing"));
       return;
     }
     setBusy(true);
@@ -39,21 +42,21 @@ export default function Login() {
         <Link to="/" className="auth-topbar">
           <Logo size={30} tagline={null} tone="light" />
         </Link>
-        <ThemeSwitch onDark />
+        <span className="row-tight"><UiLanguageSwitch onDark /><ThemeSwitch onDark /></span>
       </div>
       <div className="auth-page">
       <form className="auth-card" onSubmit={submit} noValidate>
         <Link to="/" className="brand auth-brand">
           <Logo size={56} />
         </Link>
-        <h1>Welcome back</h1>
-        <p className="muted">Log in to ask questions and check your crops.</p>
+        <h1>{t("login.title")}</h1>
+        <p className="muted">{t("login.subtitle")}</p>
         {error && (
           <div className="banner banner-error" role="alert">
             {error}
           </div>
         )}
-        <Field label="Mobile number or email" htmlFor="username">
+        <Field label={t("login.username")} htmlFor="username">
           <input
             id="username"
             className="input"
@@ -64,7 +67,7 @@ export default function Login() {
             placeholder="98765 43210"
           />
         </Field>
-        <Field label="Password" htmlFor="password">
+        <Field label={t("form.password")} htmlFor="password">
           <input
             id="password"
             type="password"
@@ -75,10 +78,10 @@ export default function Login() {
           />
         </Field>
         <button className="btn btn-primary btn-block btn-large" disabled={busy}>
-          {busy ? <Spinner label="Logging in…" /> : (<><LogIn size={18} /> Log in</>)}
+          {busy ? <Spinner label={t("login.busy")} /> : (<><LogIn size={18} /> {t("login.button")}</>)}
         </button>
         <p className="auth-switch">
-          New here? <Link to="/register">Create an account</Link>
+          {t("login.newHere")} <Link to="/register">{t("login.create")}</Link>
         </p>
       </form>
       </div>

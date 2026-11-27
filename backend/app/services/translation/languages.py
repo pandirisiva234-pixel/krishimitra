@@ -54,6 +54,7 @@ INTENTS = [
     ("irrigation_water", "Irrigation scheduling, water management, drip and sprinkler systems"),
     ("weather", "Current weather, rain forecast, weather-based farm decisions"),
     ("harvest_storage", "Harvest timing, post-harvest handling, drying and storage"),
+    ("market_price", "Today's mandi (market) prices of crops, from Agmarknet"),
     ("greeting", "Hello, thanks and other small talk"),
     ("other", "Anything outside the topics above"),
 ]

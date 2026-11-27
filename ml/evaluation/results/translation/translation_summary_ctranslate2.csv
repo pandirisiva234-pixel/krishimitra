@@ -1,2 +1,2 @@
 language,sentences,to_english_chrF++,to_english_BLEU,from_english_chrF++,avg_seconds_per_pair
-te,20,40.91,22.91,35.79,4.0
+te,20,40.91,22.91,35.79,4.34

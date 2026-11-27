@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Camera, X } from "lucide-react";
+import { useI18n } from "../i18n";
 
 /** Live camera preview; "Capture" returns a JPEG Blob via onCapture. Uses the back camera on phones. */
 export default function CameraCapture({ onCapture, onClose }) {
+  const { t } = useI18n();
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const [error, setError] = useState(null);
@@ -11,7 +13,7 @@ export default function CameraCapture({ onCapture, onClose }) {
   useEffect(() => {
     let cancelled = false;
     if (!navigator.mediaDevices?.getUserMedia) {
-      setError("This browser cannot open the camera. Upload a photo instead.");
+      setError(t("camera.noSupport"));
       return undefined;
     }
     navigator.mediaDevices
@@ -23,7 +25,7 @@ export default function CameraCapture({ onCapture, onClose }) {
         videoRef.current.onloadedmetadata = () => setReady(true);
       })
       .catch((e) =>
-        setError(e?.name === "NotAllowedError" ? "Camera permission was denied." : "No camera found. Upload a photo instead."),
+        setError(e?.name === "NotAllowedError" ? t("camera.denied") : t("camera.none")),
       );
     return () => {
       cancelled = true;
@@ -48,17 +50,17 @@ export default function CameraCapture({ onCapture, onClose }) {
         <>
           <video ref={videoRef} autoPlay playsInline muted className="camera-video" />
           <div className="camera-guide" aria-hidden>
-            Fill the frame with one leaf
+            {t("camera.guide")}
           </div>
         </>
       )}
       <div className="camera-actions">
         <button className="btn btn-ghost" onClick={onClose}>
-          <X size={18} /> Close
+          <X size={18} /> {t("common.close")}
         </button>
         {!error && (
           <button className="btn btn-primary" onClick={capture} disabled={!ready}>
-            <Camera size={18} /> Capture
+            <Camera size={18} /> {t("camera.capture")}
           </button>
         )}
       </div>

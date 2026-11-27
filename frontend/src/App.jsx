@@ -8,6 +8,7 @@ import { ToastProvider } from "./context/ToastContext";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import { I18nProvider, useI18n } from "./i18n";
 
 // Heavier pages (charts, recorder) load only when opened
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -23,13 +24,14 @@ const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
 const AdminDocuments = lazy(() => import("./pages/admin/AdminDocuments"));
 
 function NotFound() {
+  const { t } = useI18n();
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1>Page not found</h1>
-        <p className="muted">The page you opened does not exist.</p>
+        <h1>{t("notFound.title")}</h1>
+        <p className="muted">{t("notFound.text")}</p>
         <Link to="/" className="btn btn-primary">
-          Go home
+          {t("notFound.home")}
         </Link>
       </div>
     </div>
@@ -38,6 +40,7 @@ function NotFound() {
 
 export default function App() {
   return (
+    <I18nProvider>
     <BrowserRouter>
       <ToastProvider>
         <AuthProvider>
@@ -71,5 +74,6 @@ export default function App() {
         </AuthProvider>
       </ToastProvider>
     </BrowserRouter>
+    </I18nProvider>
   );
 }

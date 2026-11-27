@@ -125,6 +125,15 @@ def test_admin_dashboard_and_statistics_reflect_real_data(client, admin, farmer,
     assert stats["grounded_answer_pct"] == 100.0
     farmer_dash = client.get("/api/dashboard/summary", headers=farmer["headers"]).json()
     assert farmer_dash["total_queries"] == 2 and farmer_dash["total_disease_scans"] == 1
+    # chart data
+    assert len(farmer_dash["activity_14d"]) == 14 and farmer_dash["activity_14d"][-1]["count"] == 2
+    assert sum(d["count"] for d in farmer_dash["activity_14d"]) == 2
+    assert farmer_dash["topics"] == [{"label": "pest_disease", "count": 2}]
+    assert farmer_dash["scan_outcomes"] == [{"label": "disease", "count": 1}]
+    assert len(stats["registrations_per_day"]) == 30 and stats["registrations_per_day"][-1]["count"] == 1
+    assert len(stats["response_seconds_per_day"]) == 1 and stats["response_seconds_per_day"][0]["value"] >= 0
+    assert stats["scan_outcomes"] == [{"label": "disease", "count": 1}]
+    assert stats["feedback"] == []
 
 
 def test_user_management(client, admin, farmer):
@@ -141,3 +150,21 @@ def test_system_status(client, admin):
     status = client.get("/api/admin/system", headers=admin["headers"]).json()
     assert status["database"] == "ok" and status["vector_store"] == "ok"
     assert status["disease_model_available"] is True and status["openweather_configured"] is True
+
+
+def test_fill_days_adds_empty_days():
+    from datetime import date
+
+    from app.api.routes.dashboard import fill_days
+    out = fill_days([(date(2026, 11, 20), 3), ("2026-11-22", 1)], 4, today=date(2026, 11, 22))
+    assert out == [{"label": "2026-11-19", "count": 0}, {"label": "2026-11-20", "count": 3},
+                   {"label": "2026-11-21", "count": 0}, {"label": "2026-11-22", "count": 1}]
+
+
+def test_feedback_chart_counts_votes(client, admin, farmer, knowledge):
+    r = client.post("/api/assistant/query", headers=farmer["headers"], json={"text": "tomato leaf spots", "language_code": "en"})
+    client.post("/api/feedback", headers=farmer["headers"],
+                json={"response_id": r.json()["response_id"], "is_helpful": True})
+    stats = client.get("/api/admin/statistics?days=7", headers=admin["headers"]).json()
+    assert stats["feedback"] == [{"label": "helpful", "count": 1}]
+    assert len(stats["registrations_per_day"]) == 7

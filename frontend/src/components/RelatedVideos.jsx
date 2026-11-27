@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { BadgeCheck, PlayCircle, Youtube } from "lucide-react";
 import { assistant } from "../api/endpoints";
+import { useI18n } from "../i18n";
 
-const SKIP_INTENTS = new Set(["greeting", "weather"]);
+const SKIP_INTENTS = new Set(["greeting", "weather", "market_price"]);
 
 export function formatDuration(seconds) {
   if (!seconds && seconds !== 0) return "";
@@ -18,6 +19,7 @@ export function formatDuration(seconds) {
  * Hidden completely when the server has no YouTube key or nothing was found.
  */
 export default function RelatedVideos({ question, original, languageCode, intent, autoLoad = false }) {
+  const { t } = useI18n();
   const [state, setState] = useState({ status: "idle", videos: [] });
   const usable = question && !SKIP_INTENTS.has(intent);
 
@@ -40,18 +42,18 @@ export default function RelatedVideos({ question, original, languageCode, intent
   if (state.status === "idle") {
     return (
       <button className="link-btn videos-toggle" onClick={load}>
-        <Youtube size={14} aria-hidden /> Show related videos
+        <Youtube size={14} aria-hidden /> {t("videos.show")}
       </button>
     );
   }
   if (state.status === "loading") {
-    return <p className="muted small videos-loading"><Youtube size={14} aria-hidden /> Finding related videos…</p>;
+    return <p className="muted small videos-loading"><Youtube size={14} aria-hidden /> {t("videos.finding")}</p>;
   }
   if (!state.videos.length) return null;
 
   return (
-    <section className="videos" aria-label="Related videos">
-      <h4><Youtube size={15} aria-hidden /> Related videos</h4>
+    <section className="videos" aria-label={t("videos.title")}>
+      <h4><Youtube size={15} aria-hidden /> {t("videos.title")}</h4>
       <ul>
         {state.videos.map((v) => (
           <li key={v.video_id}>
@@ -66,8 +68,8 @@ export default function RelatedVideos({ question, original, languageCode, intent
                 <span className="video-channel muted small">
                   {v.channel}
                   {v.trusted && (
-                    <span className="video-trusted" title="Official or extension channel">
-                      <BadgeCheck size={13} aria-hidden /> Trusted
+                    <span className="video-trusted" title={t("videos.trustedHint")}>
+                      <BadgeCheck size={13} aria-hidden /> {t("videos.trusted")}
                     </span>
                   )}
                 </span>
@@ -76,7 +78,7 @@ export default function RelatedVideos({ question, original, languageCode, intent
           </li>
         ))}
       </ul>
-      <p className="muted small">Videos are from YouTube. Check advice with your local KVK before spraying.</p>
+      <p className="muted small">{t("videos.note")}</p>
     </section>
   );
 }

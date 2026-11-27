@@ -11,6 +11,7 @@ import { useAuth } from "../context/AuthContext";
 import { useSpeech } from "../context/SpeechContext";
 import { useToast } from "../context/ToastContext";
 import { formatDateTime, pct, prettyLabel, splitForSpeech } from "../utils/format";
+import { useI18n } from "../i18n";
 
 const MAX_MB = 5;
 const SPEECH_PREFIX = "opinion-";
@@ -24,6 +25,7 @@ export function diseaseQuestion(d) {
 
 /** Gemini looks at the same photo when the trained model is unsure; clearly labelled as general advice. */
 function SecondOpinion({ predictionId, languageCode, listenLanguage }) {
+  const { t } = useI18n();
   const toast = useToast();
   const [busy, setBusy] = useState(false);
   const [op, setOp] = useState(null);
@@ -42,11 +44,11 @@ function SecondOpinion({ predictionId, languageCode, listenLanguage }) {
     return (
       <div className="ask-more">
         <div>
-          <strong>Still want an answer?</strong>
-          <p className="muted small">An AI can look at the same photo and suggest likely causes. It is a general opinion, not a diagnosis.</p>
+          <strong>{t("disease.stillWant")}</strong>
+          <p className="muted small">{t("disease.aiCanLook")}</p>
         </div>
         <button className="btn btn-gold" onClick={get} disabled={busy}>
-          {busy ? <Spinner label="Looking at the photo…" size={16} /> : (<><Sparkles size={18} /> Get AI second opinion</>)}
+          {busy ? <Spinner label={t("disease.looking")} size={16} /> : (<><Sparkles size={18} /> {t("disease.getOpinion")}</>)}
         </button>
       </div>
     );
@@ -55,6 +57,7 @@ function SecondOpinion({ predictionId, languageCode, listenLanguage }) {
 }
 
 function OpinionView({ op, predictionId, listenLanguage, english, setEnglish }) {
+  const { t } = useI18n();
   const lang = listenLanguage || op.language_code;
   const translated = useTranslatedText(op.summary_english, lang, { [op.language_code]: op.summary });
   const showEnglish = english || lang === "en";
@@ -63,23 +66,23 @@ function OpinionView({ op, predictionId, listenLanguage, english, setEnglish }) 
     <div className="second-opinion">
       <div className="card-head">
         <h2>
-          <Sparkles size={18} /> AI second opinion
+          <Sparkles size={18} /> {t("disease.opinion")}
         </h2>
-        <span className="tag tag-warn">General advice · confidence {op.confidence}</span>
+        <span className="tag tag-warn">{t("disease.generalAdvice")} · {t("disease.confidence")} {op.confidence}</span>
       </div>
-      {translated.loading && !showEnglish ? <Spinner label="Translating…" size={16} /> : <p className="answer-text">{text}</p>}
+      {translated.loading && !showEnglish ? <Spinner label={t("common.translating")} size={16} /> : <p className="answer-text">{text}</p>}
       <div className="row">
         {!translated.loading && (
           <SpeechQueue
             id={`opinion-${predictionId}-${showEnglish ? "en" : lang}`}
             chunks={splitForSpeech(text)}
             languageCode={showEnglish ? "en" : lang}
-            label="AI second opinion"
+            label={t("disease.opinion")}
           />
         )}
         {lang !== "en" && (
           <button className="link-btn" onClick={() => setEnglish(!english)}>
-            {english ? "Show in my language" : "Show in English"}
+            {english ? t("common.showMine") : t("common.showEnglish")}
           </button>
         )}
       </div>
@@ -107,6 +110,7 @@ export function adviceLines(d) {
 }
 
 function Result({ result, languageCode, onLanguage }) {
+  const { t } = useI18n();
   const navigate = useNavigate();
   const [english, setEnglish] = useState(false);
   const d = result.disease;
@@ -129,7 +133,7 @@ function Result({ result, languageCode, onLanguage }) {
         <div>
           <div className="result-title">
             {result.is_uncertain
-              ? `Not sure (best guess: ${d ? `${d.crop} · ${d.disease_name}` : prettyLabel(result.predicted_label)})`
+              ? t("disease.notSure", { guess: d ? `${d.crop} · ${d.disease_name}` : prettyLabel(result.predicted_label) })
               : d
                 ? `${d.crop} · ${d.disease_name}`
                 : prettyLabel(result.predicted_label)}
@@ -138,7 +142,7 @@ function Result({ result, languageCode, onLanguage }) {
         </div>
       </div>
       <div className="result-confidence">
-        <span className="muted small">Model confidence</span>
+        <span className="muted small">{t("disease.modelConfidence")}</span>
         <ConfidenceBar value={result.confidence} />
       </div>
 
@@ -148,12 +152,12 @@ function Result({ result, languageCode, onLanguage }) {
             <ListenLanguage value={languageCode} onChange={onLanguage} />
             {languageCode !== "en" && (
               <button className="link-btn" onClick={() => setEnglish(!english)}>
-                {english ? "Show in my language" : "Show in English"}
+                {english ? t("common.showMine") : t("common.showEnglish")}
               </button>
             )}
           </div>
           {translated.loading && !showEnglish ? (
-            <Spinner label="Translating…" size={16} />
+            <Spinner label={t("common.translating")} size={16} />
           ) : (
             <>
               {pairs.map(([heading, text], i) => (
@@ -163,25 +167,25 @@ function Result({ result, languageCode, onLanguage }) {
                 </section>
               ))}
               <p className="muted small">{safety}</p>
-              {translated.failed && !showEnglish && <p className="muted small">Translation is not available right now; showing English.</p>}
+              {translated.failed && !showEnglish && <p className="muted small">{t("common.translationFailed")}</p>}
               <SpeechQueue
                 id={`disease-${result.id}-${showEnglish ? "en" : languageCode}`}
                 chunks={splitForSpeech(spoken)}
                 languageCode={showEnglish ? "en" : languageCode}
-                label={d ? `${d.crop} · ${d.disease_name}` : "Disease advice"}
+                label={d ? `${d.crop} · ${d.disease_name}` : t("disease.advice")}
               />
             </>
           )}
           {followUp && (
             <div className="ask-more">
               <div>
-                <strong>Need more detail?</strong>
+                <strong>{t("disease.needMore")}</strong>
                 <p className="muted small">
-                  Get crop-specific advice from the official guides (NIPHM, ICAR), with sources, in your language.
+                  {t("disease.getAdvice")}
                 </p>
               </div>
               <button className="btn btn-gold" onClick={() => navigate(`/assistant?q=${encodeURIComponent(followUp)}`)}>
-                <MessageSquare size={18} /> Ask KrishiMitra about this disease
+                <MessageSquare size={18} /> {t("disease.askAbout")}
               </button>
             </div>
           )}
@@ -198,7 +202,7 @@ function Result({ result, languageCode, onLanguage }) {
       )}
 
       <details className="top-k">
-        <summary>Other possibilities</summary>
+        <summary>{t("disease.other")}</summary>
         <ul>
           {result.top_predictions.map((p) => (
             <li key={p.label}>
@@ -208,7 +212,7 @@ function Result({ result, languageCode, onLanguage }) {
           ))}
         </ul>
         <p className="muted small">
-          Model {result.model_version || "—"} · {result.inference_ms} ms · sharpness {result.blur_score}
+          {t("disease.model")} {result.model_version || "—"} · {result.inference_ms} ms · {t("disease.sharpness")} {result.blur_score}
         </p>
       </details>
     </div>
@@ -217,6 +221,7 @@ function Result({ result, languageCode, onLanguage }) {
 
 export default function DiseaseDetection() {
   const { user } = useAuth();
+  const { t, lang } = useI18n();
   const toast = useToast();
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -226,7 +231,8 @@ export default function DiseaseDetection() {
   const [history, setHistory] = useState([]);
   const inputRef = useRef(null);
   const speech = useSpeech();
-  const [listenLanguage, setListenLanguage] = useState(user.preferred_language?.code || "en");
+  const [listenLanguage, setListenLanguage] = useState(lang || user.preferred_language?.code || "en");
+  useEffect(() => setListenLanguage(lang), [lang]); // follows the app language
 
   // Clear the photo and result (and stop this page's voice) to start a fresh scan
   const newScan = () => {
@@ -245,8 +251,8 @@ export default function DiseaseDetection() {
   useEffect(() => () => preview && URL.revokeObjectURL(preview), [preview]);
 
   const choose = (blob, name) => {
-    if (!blob.type.startsWith("image/")) return toast.error("Please choose a photo (JPG or PNG).");
-    if (blob.size > MAX_MB * 1024 * 1024) return toast.error(`Photo is larger than ${MAX_MB} MB.`);
+    if (!blob.type.startsWith("image/")) return toast.error(t("photo.choose"));
+    if (blob.size > MAX_MB * 1024 * 1024) return toast.error(t("photo.tooBig", { mb: MAX_MB }));
     setFile({ blob, name });
     setPreview(URL.createObjectURL(blob));
     setResult(null);
@@ -269,16 +275,16 @@ export default function DiseaseDetection() {
   return (
     <div>
       <PageHeader
-        title="Plant disease detection"
-        subtitle="Photograph one affected leaf in daylight. The model suggests the likely disease."
+        title={t("disease.title")}
+        subtitle={t("disease.subtitle")}
         actions={
           <button className="btn btn-ghost" onClick={newScan} disabled={!file && !result}>
-            <Plus size={18} /> New scan
+            <Plus size={18} /> {t("photo.newScan")}
           </button>
         }
       />
       <div className="grid-2">
-        <Card title="Leaf photo" icon={ImagePlus}>
+        <Card title={t("disease.leafPhoto")} icon={ImagePlus}>
           {camera ? (
             <CameraCapture onCapture={(blob) => choose(blob, "camera.jpg")} onClose={() => setCamera(false)} />
           ) : (
@@ -297,12 +303,12 @@ export default function DiseaseDetection() {
                 onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
               >
                 {preview ? (
-                  <img src={preview} alt="Selected leaf" />
+                  <img src={preview} alt={t("disease.leafPhoto")} />
                 ) : (
                   <div className="dropzone-empty">
                     <ImagePlus size={36} />
-                    <p>Tap to choose a photo, or drop it here</p>
-                    <p className="muted small">JPG or PNG, up to {MAX_MB} MB</p>
+                    <p>{t("photo.tapToChoose")}</p>
+                    <p className="muted small">{t("photo.formats", { mb: MAX_MB })}</p>
                   </div>
                 )}
               </div>
@@ -320,28 +326,28 @@ export default function DiseaseDetection() {
               />
               <div className="row">
                 <button className="btn btn-ghost" onClick={() => setCamera(true)}>
-                  <Camera size={18} /> Use camera
+                  <Camera size={18} /> {t("photo.useCamera")}
                 </button>
                 <button className="btn btn-primary" onClick={analyse} disabled={!file || busy}>
-                  {busy ? <Spinner label="Analysing…" size={16} /> : (<><ScanLine size={18} /> Detect disease</>)}
+                  {busy ? <Spinner label={t("disease.analysing")} size={16} /> : (<><ScanLine size={18} /> {t("disease.detect")}</>)}
                 </button>
               </div>
             </>
           )}
         </Card>
 
-        <Card title="Result" icon={Leaf}>
+        <Card title={t("disease.result")} icon={Leaf}>
           {result ? (
             <Result result={result} languageCode={listenLanguage} onLanguage={setListenLanguage} />
           ) : (
-            <EmptyState icon={ScanLine} title="No result yet">
-              Choose or capture a photo, then tap “Detect disease”.
+            <EmptyState icon={ScanLine} title={t("disease.noResult")}>
+              {t("disease.chooseThenDetect")}
             </EmptyState>
           )}
         </Card>
       </div>
 
-      <Card title="Previous scans" className="mt">
+      <Card title={t("disease.previous")} className="mt">
         {history.length ? (
           <div className="scan-grid">
             {history.map((h) => (
@@ -349,13 +355,13 @@ export default function DiseaseDetection() {
                 <AuthImage url={h.image_url} alt={h.predicted_label} className="scan-img" />
                 <span className="scan-label">{h.disease ? `${h.disease.crop} · ${h.disease.disease_name}` : prettyLabel(h.predicted_label)}</span>
                 <span className="muted small">
-                  {h.is_uncertain ? "uncertain" : pct(h.confidence)} · {formatDateTime(h.created_at)}
+                  {h.is_uncertain ? t("disease.uncertain") : pct(h.confidence)} · {formatDateTime(h.created_at)}
                 </span>
               </button>
             ))}
           </div>
         ) : (
-          <p className="muted">Your scans will appear here.</p>
+          <p className="muted">{t("disease.scansHere")}</p>
         )}
       </Card>
     </div>

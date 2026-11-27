@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { meta } from "../api/endpoints";
+import { useI18n } from "../i18n";
 
 let cache = null;
 
-// Tested with real farmers' recordings: Telugu (20 questions), Hindi, Kannada, English. Others work
-// end to end but have not been evaluated yet, so they are marked "beta".
+// Languages with a language-specific speech model (IIT Madras) that were tested end to end.
+// The others work end to end with the general Whisper model and are marked "beta".
 export const TESTED_LANGUAGES = ["te", "hi", "kn", "ta", "gu", "en"];
 
 export function languageLabel(l) {
@@ -29,11 +30,12 @@ export function useLanguages() {
 }
 
 export default function LanguageSelect({ value, onChange, id = "language", includeAuto = false, languages: given }) {
+  const { t } = useI18n();
   const loaded = useLanguages();
   const languages = given || loaded;
   return (
     <select id={id} value={value} onChange={(e) => onChange(e.target.value)} className="select">
-      {includeAuto && <option value="">Detect automatically</option>}
+      {includeAuto && <option value="">{t("lang.auto")}</option>}
       {languages.map((l) => (
         <option key={l.code} value={l.code}>
           {languageLabel(l)}
